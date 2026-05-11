@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="1080" height="1350">
+  <defs>
+    <pattern id="grid2h" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#ffffff" stroke-opacity="0.04" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- Layer 1: AI-generated retrofuture background (from Replicate Recraft v3) -->
+  <image href="poc-bg-clean.png" x="0" y="0" width="1080" height="1350" preserveAspectRatio="xMidYMid slice"/>
+
+  <!-- Layer 1.5: Dim overlay so content reads clean -->
+  <rect width="1080" height="1350" fill="#1a0d3a" opacity="0.65"/>
+
+  <!-- Layer 2: brand grid (very subtle) -->
+  <rect width="1080" height="1350" fill="url(#grid2h)"/>
+
+  <!-- Top header -->
+  <text x="60" y="80" font-family="'Courier New', monospace" font-size="26" fill="#ffffff" font-weight="bold">Сокращения 2026</text>
+  <text x="1020" y="80" font-family="'Courier New', monospace" font-size="26" fill="#ffffff" font-weight="bold" text-anchor="end">2026</text>
+
+  <!-- Giant standalone number — main visual hook -->
+  <text x="60" y="340" font-family="Impact, 'Arial Black', sans-serif" font-size="280" fill="#e8f045" font-weight="900" letter-spacing="-8">26%</text>
+
+  <!-- Subline below number -->
+  <text x="60" y="430" font-family="Inter, Arial, sans-serif" font-size="42" fill="#ffffff" font-weight="700">всех увольнений в США в апреле</text>
+  <text x="60" y="485" font-family="Inter, Arial, sans-serif" font-size="42" fill="#ffffff" font-weight="700">2026 — напрямую из-за ИИ</text>
+
+  <!-- Yellow underline accent -->
+  <rect x="60" y="510" width="500" height="6" fill="#e8f045"/>
+
+  <!-- Secondary stat -->
+  <text x="60" y="610" font-family="Inter, Arial, sans-serif" font-size="36" fill="#e8f045" font-weight="600">21 490 рабочих мест</text>
+  <text x="60" y="660" font-family="Inter, Arial, sans-serif" font-size="32" fill="#ffffff" font-weight="400">за один месяц.</text>
+
+  <!-- Body context (with subtle dark backdrop for readability over busy bg) -->
+  <rect x="40" y="770" width="900" height="200" fill="#1a0d3a" opacity="0.45" rx="8"/>
+  <text x="60" y="810" font-family="Inter, Arial, sans-serif" font-size="32" fill="#ffffff" font-weight="400">И это число будет только расти. В отчётах</text>
+  <text x="60" y="855" font-family="Inter, Arial, sans-serif" font-size="32" fill="#ffffff" font-weight="400">компаний ИИ теперь — конкретная строка</text>
+  <text x="60" y="900" font-family="Inter, Arial, sans-serif" font-size="32" fill="#ffffff" font-weight="400">в причинах массовых сокращений, а не</text>
+  <text x="60" y="945" font-family="Inter, Arial, sans-serif" font-size="32" fill="#ffffff" font-weight="400">туманная «оптимизация».</text>
+
+  <!-- Pixelarticons: brackets -->
+  <g transform="translate(840 1060) scale(6)" fill="#ffffff">
+    <path d="M5 4h4v2H5zm14 0h-4v2h4zM5 20h4v-2H5zm14 0h-4v-2h4zM3 6h2v12H3zm18 0h-2v12h2z"/>
+  </g>
+
+  <!-- Footer anchors -->
+  <g transform="translate(60 1270)">
+    <rect x="0" y="0" width="120" height="50" rx="25" fill="#ffffff"/>
+    <text x="60" y="35" font-family="Inter, Arial, sans-serif" font-size="24" fill="#000000" font-weight="bold" text-anchor="middle">2/7</text>
+  </g>
+  <text x="200" y="1305" font-family="Inter, Arial, sans-serif" font-size="22" fill="#ffffff" opacity="0.85">Подробнее на traffnews.com</text>
+  <g transform="translate(820 1270)">
+    <rect x="0" y="0" width="200" height="50" rx="25" fill="#ffffff"/>
+    <text x="100" y="35" font-family="Inter, Arial, sans-serif" font-size="24" fill="#000000" font-weight="900" text-anchor="middle">TRAFFNEWS</text>
+  </g>
+</svg>

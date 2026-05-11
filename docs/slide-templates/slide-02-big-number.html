@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<!--
+  Slide type: big_number
+  Use for: главное число / процент / показатель статьи
+  Reference: preview/slide-02-hybrid-v2.png
+  Canvas: 1080×1350
+
+  Variables (mapped from PostDirector slide object):
+    {{bg_image_url}}       — URL retrofuture-фона от Replicate
+    {{topic_label}}        — top-left header (e.g. "Сокращения 2026")
+    {{year}}               — top-right header (e.g. "2026")
+    {{big_number}}         — главное число (e.g. "26%")
+    {{subline_1}}          — первая строка под цифрой
+    {{subline_2}}          — вторая строка под цифрой
+    {{secondary_yellow}}   — вторичная статистика (e.g. "21 490 рабочих мест")
+    {{secondary_white}}    — комментарий под secondary_yellow (e.g. "за один месяц.")
+    {{body_text}}          — контекстный параграф 3-4 строки
+    {{page_counter}}       — счётчик (e.g. "2/7")
+-->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@700&display=swap');
+
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .canvas {
+    position: relative;
+    width: 1080px;
+    height: 1350px;
+    background: #1a0d3a;
+    overflow: hidden;
+  }
+
+  .bg-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .dim-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(26, 13, 58, 0.65);
+  }
+
+  .grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  .top-header-left,
+  .top-header-right {
+    position: absolute;
+    top: 60px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 26px;
+    font-weight: 700;
+    color: #ffffff;
+  }
+  .top-header-left { left: 60px; }
+  .top-header-right { right: 60px; }
+
+  .big-number {
+    position: absolute;
+    left: 60px;
+    top: 130px;
+    font-family: 'Anton', Impact, 'Arial Black', sans-serif;
+    font-size: 280px;
+    color: #e8f045;
+    font-weight: 900;
+    letter-spacing: -8px;
+    line-height: 1;
+  }
+
+  .subline {
+    position: absolute;
+    left: 60px;
+    top: 480px;
+    font-size: 42px;
+    color: #ffffff;
+    font-weight: 700;
+    line-height: 1.3;
+    max-width: 960px;
+  }
+
+  .underline-accent {
+    position: absolute;
+    left: 60px;
+    top: 640px;
+    width: 500px;
+    height: 6px;
+    background: #e8f045;
+  }
+
+  .sec-yellow {
+    position: absolute;
+    left: 60px;
+    top: 690px;
+    font-size: 36px;
+    color: #e8f045;
+    font-weight: 600;
+  }
+
+  .sec-white {
+    position: absolute;
+    left: 60px;
+    top: 745px;
+    font-size: 32px;
+    color: #ffffff;
+    font-weight: 400;
+  }
+
+  .body-text {
+    position: absolute;
+    left: 40px;
+    top: 830px;
+    width: 1000px;
+    padding: 30px;
+    background: rgba(26, 13, 58, 0.45);
+    border-radius: 8px;
+    font-size: 32px;
+    color: #ffffff;
+    font-weight: 400;
+    line-height: 1.4;
+  }
+
+  /* Decorative pixel-art brackets (from pixelarticons) */
+  .brackets-icon {
+    position: absolute;
+    right: 80px;
+    top: 1100px;
+    width: 144px;
+    height: 144px;
+  }
+  .brackets-icon path { fill: #ffffff; }
+
+  /* Brand anchors — bottom row */
+  .pill {
+    position: absolute;
+    top: 1270px;
+    height: 50px;
+    background: #ffffff;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000000;
+    font-size: 24px;
+  }
+  .pill-left {
+    left: 60px;
+    width: 120px;
+    font-weight: 700;
+  }
+  .pill-right {
+    right: 60px;
+    width: 200px;
+    font-weight: 900;
+  }
+  .footer-text {
+    position: absolute;
+    left: 200px;
+    top: 1290px;
+    font-size: 22px;
+    color: #ffffff;
+    opacity: 0.85;
+  }
+</style>
+</head>
+<body>
+  <div class="canvas">
+    <img class="bg-img" src="{{bg_image_url}}" />
+    <div class="dim-overlay"></div>
+    <div class="grid"></div>
+
+    <div class="top-header-left">{{topic_label}}</div>
+    <div class="top-header-right">{{year}}</div>
+
+    <div class="big-number">{{big_number}}</div>
+
+    <div class="subline">{{subline_1}}<br/>{{subline_2}}</div>
+    <div class="underline-accent"></div>
+
+    <div class="sec-yellow">{{secondary_yellow}}</div>
+    <div class="sec-white">{{secondary_white}}</div>
+
+    <div class="body-text">{{body_text}}</div>
+
+    <!-- pixelarticons brackets, decorative -->
+    <svg class="brackets-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M5 4h4v2H5zm14 0h-4v2h4zM5 20h4v-2H5zm14 0h-4v-2h4zM3 6h2v12H3zm18 0h-2v12h2z"/>
+    </svg>
+
+    <div class="pill pill-left">{{page_counter}}</div>
+    <div class="footer-text">Подробнее на traffnews.com</div>
+    <div class="pill pill-right">TRAFFNEWS</div>
+  </div>
+</body>
+</html>

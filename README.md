@@ -1,120 +1,87 @@
-# Traffnews Posting — Static Post Bundle Pipeline
+# Traffnews Posting — Cloud Pipeline (Make + APITemplate.io)
 
-**Статус:** 🟡 R&D / спецификации · код будет жить в `D:\Prog\SMM\` (расширение существующего проекта)
+**Статус:** 🟢 Архитектура зафиксирована · v1 MVP — TG article-announce карусели · полностью в облаке, без кода и без папок с проектом
 
-Параллельная ветка к существующему **video pipeline** (агент SOCL-04, видео-Reels 30с). Цель — генерация **статических post-bundles** (TG-caption + IG-caption + 5-10 brand-карусель-карточек) под `@traffnews` и `@traffnews_ig`.
+Автогенерация постов для `@traffnews` (Telegram). Вход — URL статьи с traffnews.com. Выход — пост с карусельью 5-10 слайдов, опубликованный в канал.
 
-## Не отдельный проект
+## Архитектура в одном абзаце
 
-Это **расширение D:\Prog\SMM**, не отдельная кодовая база:
+**Никакого Java, никакого Docker, никаких папок с проектом.** Всё живёт в облаке у 5 SaaS-сервисов которые общаются между собой по HTTP. Make.com оркестрирует, OpenAI пишет тексты, Replicate генерит retrofuture-фоны, APITemplate.io рендерит слайды из HTML-шаблонов, Telegram Bot API публикует.
 
 ```
-D:\Prog\SMM\
-├── (существующее, не трогать)
-│   ├── CLAUDE.md
-│   ├── docs/
-│   ├── scripts/java/src/main/java/com/traffnews/smm/
-│   │   ├── director/    ← переиспользуем (DirectorAgent, ImagePromptBuilder)
-│   │   ├── research/    ← переиспользуем (TopicResearcher)
-│   │   ├── executor/    ← частично переиспользуем (ShotExecutor → PostSlideExecutor)
-│   │   ├── finisher/    ← частично (BrandedFinisherHF → PostFinisher)
-│   │   ├── hedra/       ← НЕ нужно для статики
-│   │   ├── elevenlabs/  ← НЕ нужно для статики (нет аудио)
-│   │   └── ass/         ← НЕ нужно (нет видео-субтитров)
-│   └── tests/
-│
-└── scripts/java/src/main/java/com/traffnews/smm/post/    ← НОВЫЙ ПАКЕТ
-    ├── PostDirector.java        — gpt-4o → post_brief.json
-    ├── PostSlideExecutor.java   — slide image generation per slide
-    ├── PostBundleAssembler.java — пакует bundle/ folder
-    ├── PostQA.java              — vision-check slides match topic
-    └── ...
-
-D:\Prog\Постинг\                 ← ЭТА ПАПКА: только документация и спеки
-├── README.md
-├── CLAUDE.md
-└── docs/
-    ├── post-pipeline.md          — pipeline design
-    ├── bundle-spec.md            — output bundle format
-    ├── integration-plan.md       — что добавляется в D:\Prog\SMM
-    └── v2-publication/           — спека публикации в TG/IG (deferred)
-        ├── architecture-schema.md
-        ├── spec-ui.md
-        ├── spec-telegram.md
-        ├── spec-instagram.md
-        ├── hard-rules.md
-        └── roadmap.md
+┌──────────────────────────────────────────────────────────────┐
+│  ОБЛАКО (на твоём компе — только браузер)                    │
+│                                                               │
+│  ┌──────────────┐    ┌──────────────────┐                    │
+│  │  Make.com    │◄──►│  apitemplate.io  │                    │
+│  │  Сценарий    │    │  9 HTML-шаблонов │                    │
+│  │  из 6 нод    │    │  (по типам)      │                    │
+│  └──────┬───────┘    └──────────────────┘                    │
+│         │                                                     │
+│         ├─► OpenAI API (PostDirector — текст + brief)        │
+│         ├─► Replicate (retrofuture фон через Recraft v3)     │
+│         ├─► APITemplate.io (рендер каждого слайда)           │
+│         └─► Telegram Bot API (sendMediaGroup → @traffnews)   │
+│                                                               │
+└──────────────────────────────────────────────────────────────┘
 ```
 
-## Что на выходе
+## Что эта папка теперь содержит
 
-5 разных типов постов под TG (от Дарии Г., SMM):
+`D:\Prog\Постинг\` — **только документация и визуальные референсы**, никакого кода.
 
-| # | Тип | Очерёдность |
+```
+D:\Prog\Постинг\
+├── README.md                        ← ты здесь
+├── CLAUDE.md                        ← fresh-agent entry point (читать первым)
+├── docs/
+│   ├── architecture-make.md         ← полная архитектура: сервисы, потоки данных, JSON-схемы
+│   ├── setup-guide.md               ← пошаговая инструкция настройки (Make + APITemplate аккаунты)
+│   ├── brand-dna.md                 ← цвета, шрифты, anchors, style-family rule (для HTML-шаблонов)
+│   ├── director-prompt-article.md   ← финальный промпт для OpenAI-ноды в Make
+│   ├── types-roadmap.md             ← 5 типов постов (TG-MVP = article-announce)
+│   ├── slide-templates/             ← готовые HTML-шаблоны для APITemplate.io
+│   │   ├── slide-02-big-number.html
+│   │   └── (другие появятся по мере разработки)
+│   └── _stale/                      ← устаревшие doc'и от Java-эпохи (для истории)
+│       ├── post-pipeline.md
+│       ├── integration-plan.md
+│       └── bundle-spec.md
+└── preview/                         ← визуальные референсы для дизайна HTML-шаблонов
+    ├── slide-01-cover.svg ... slide-07-outro.svg  ← reference design 7 слайдов
+    ├── slide-02-hybrid.svg          ← PoC гибрида AI-bg + content layer
+    ├── poc-bg-clean.png             ← пример retrofuture-фона от Replicate
+    └── pixelarticons/svg/           ← icon pack 800 SVG (источник иконок для inline-embed в HTML)
+```
+
+## Что выходит на выходе
+
+Post в канале `@traffnews`:
+- **Caption** (до 1024 символов, HTML-формат с кликабельной ссылкой на оригинал статьи)
+- **Карусель 5-10 слайдов** (1080×1350, AI-фон + brand-anchors + content)
+- **Хэштеги** (1-2 для TG)
+
+Пример визуала — `preview/slide-02-hybrid-v2.png` (PoC из сессии разработки).
+
+## Что нужно сделать чтобы запустить (один раз)
+
+| Этап | Время | Кто |
 |---|---|---|
-| 5 | **Вакансии** | **MVP — начинаем здесь** |
-| 2 | Дайджесты недели | 2-й |
-| 3+4 | Подборки сервисов + AI/tool обзоры | 3-й |
-| 1 | Новостные посты (RSS-рерайт) | 4-й |
+| Регистрация на Make.com + APITemplate.io | 5 мин | Ты |
+| Создать 9 HTML-шаблонов в APITemplate (вставить готовый код из `docs/slide-templates/`) | 30-60 мин | Ты или программист |
+| Собрать сценарий в Make.com по `docs/setup-guide.md` | 1-2 часа | Программист |
+| Подключить API-ключи (OpenAI, Replicate, APITemplate, Telegram Bot) | 10 мин | Программист |
+| Тестовый прогон + отладка | 1 час | Ты + программист |
 
-См. `docs/types-roadmap.md` для деталей каждого.
-
-**MVP = Vacancy-pipeline.** Input — текст вакансии. Output — папка-bundle:
-
-```
-post_bundles/vacancy_2026-05-11_<slug>_<hash>/
-├── bundle.json
-├── tg.md                ← готовый caption для Telegram (HTML, ~600-1000 chars)
-├── hashtags-tg.txt      ← #вакансия #арбитраж ...
-├── slide_01.png         ← Hook (company + position + salary)
-├── slide_02.png         ← Requirements
-├── slide_03.png         ← Tasks
-├── slide_04.png         ← Benefits
-└── slide_05.png         ← Apply (CTA + contact)
-```
-
-SMM-щик в v1 берёт папку, в TG-клиенте грузит slides + paste caption → пост. **Публикация автоматизируется в v2** — спеки в `docs/v2-publication/`.
-
-**Instagram — отдельный трек позже.** В v1 фокус только на TG.
-
-## Что переиспользуем из существующего SMM
-
-| Класс | Где | Как используем |
-|---|---|---|
-| `TopicResearcher` | `research/` | Same — fetch `traffnews.com`, web_search для контекста |
-| `DirectorAgent` (или новый `PostDirector`) | `director/` | Аналог: gpt-4o → JSON brief с caption'ами и slide tezisи |
-| `ImagePromptBuilder` | `director/` | Reuse для генерации image prompts per slide |
-| Brand DNA (цвета, шрифты) | константы | Same — blue-deep + yellow + Manrope/Russo One/JetBrains Mono |
-| HF templates (если применимо) | `external/hyperframes-student-kit/` | Templates для slide-карточек |
-
-## Что НЕ нужно для статики
-
-- ElevenLabs TTS (нет аудио)
-- Hedra avatar (хотя можно подмешать для hero-slide в v2)
-- AssGenerator burn-in (нет видео-субтитров)
-- BrandedFinisherHF video composition (нет видео-склейки)
-- Render QA для видео (заменяется PostQA для статики)
-
-## Документация
-
-**MVP-focused (читать первым):**
-- [`docs/mvp-vacancies.md`](./docs/mvp-vacancies.md) — спека первого пайплайна (вакансии)
-- [`docs/types-roadmap.md`](./docs/types-roadmap.md) — все 5 типов от Дарии и очерёдность
-
-**Framework (общая для всех типов):**
-- [`docs/post-pipeline.md`](./docs/post-pipeline.md) — обобщённый flow (input → research → director → slides → bundle). Каждый тип = специализация этого framework.
-- [`docs/bundle-spec.md`](./docs/bundle-spec.md) — формат bundle (JSON schema, file naming) — применим ко всем типам
-- [`docs/integration-plan.md`](./docs/integration-plan.md) — куда в `D:\Prog\SMM` идёт код, какие классы reuse
-
-Reference:
-- `D:\Prog\SMM\CLAUDE.md` — read first (HARD RULES, brand voice, fabrication policy, phonetic anglicisms)
-- `D:\Prog\SMM\docs\` — детали существующего видео-pipeline
-
-V2 (отложено):
-- [`docs/v2-publication/`](./docs/v2-publication/) — спеки автопубликации в TG/IG (Bot API + Graph API + Dashboard `/social` page)
-
-Notion: https://www.notion.so/35dde7a6942a81e1a731e9bb58edb73c
+**Дальше — 0 минут в день**, всё работает автоматически по RSS-триггеру или по нажатию кнопки.
 
 ## Старт работы
 
-Открыть [`CLAUDE.md`](./CLAUDE.md).
+Открыть [`CLAUDE.md`](./CLAUDE.md) — там fresh-agent entry point с текущей картиной.
+
+Полная архитектура — [`docs/architecture-make.md`](./docs/architecture-make.md).
+Пошаговый setup — [`docs/setup-guide.md`](./docs/setup-guide.md).
+
+## Notion
+
+https://www.notion.so/35dde7a6942a81e1a731e9bb58edb73c

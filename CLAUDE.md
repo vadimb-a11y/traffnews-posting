@@ -1,120 +1,95 @@
 # Traffnews Posting — Fresh Agent Entry Point
 
-## ⚠️ Сначала прочитай это
+## ⚠️ Самое важное (прочитай в первую очередь)
 
-**Эта папка (`D:\Prog\Постинг\`) — только спецификации.** Код пишется в **`D:\Prog\SMM\`** как расширение существующего проекта SOCL-04 (видео-pipeline).
+**Этот проект — НЕ код.** Никакого Java, никакого Python, никаких папок с исходниками на компе. Весь pipeline живёт в **облаке** у 5 SaaS-сервисов и оркестрируется через **Make.com**.
 
-Перед написанием любого Java-кода — **обязательно прочитать `D:\Prog\SMM\CLAUDE.md`**. Там HARD RULES уровня всей кодовой базы: brand voice, anti-fabrication, phonetic anglicisms, темы только с traffnews.com, Java-only для нового кода, и т.д. Все эти правила **применимы и к нашему post-pipeline** — мы не отдельный проект, мы вторая ветка.
+Эта папка (`D:\Prog\Постинг\`) содержит **только**:
+- Документацию (что/как/почему)
+- Готовые HTML-шаблоны для APITemplate.io (под копипаст в их UI)
+- Визуальные референсы (preview/) — SVG-прототипы для понимания дизайна
 
-## Что это в одном абзаце
+**Никакого Java-кода больше не пишем.** Предыдущие планы по `D:\Prog\SMM\scripts\java\src\main\java\com\traffnews\smm\post\` — **отменены**. Соответствующие doc'и помечены `_stale/`.
 
-Параллельная ветка к существующему video pipeline (SOCL-04). Тот же brand voice, та же DirectorAgent-логика, тот же `TopicResearcher` — но **на выходе не видео, а bundle-папка** со статическим контентом: `tg.md` + `slide_01..NN.png`. Только Telegram в v1 (IG — отдельный трек позже). Bundle потребляется SMM-щиком вручную (в v1 — копирует в TG руками; в v2 — Dashboard `/social` страница с кнопкой Publish).
-
-**5 типов постов** (от Дарии, SMM-щика): Вакансии (MVP), Дайджесты недели, Подборки сервисов, Tool обзоры, Новостные посты. Каждый = свой подпайплайн со своим Extractor + Director. Backbone (BaseDirector, SlideRenderer, BundleWriter) — общий.
-
-См. `docs/types-roadmap.md` и `docs/mvp-vacancies.md`.
-
-## Архитектура
+## Архитектура одним абзацем
 
 ```
-INPUT
-  └── traffnews.com URL  ИЛИ  topic-prompt
-            ↓
-TopicResearcher (reuse from D:\Prog\SMM\research\)
-  └── fetch article + web_search → research.json
-            ↓
-PostDirector (NEW, analog DirectorAgent)
-  └── gpt-4o → post_brief.json:
-       {
-         tg_caption:  "...",   // HTML-формат, 5-block (HOOK/CONTEXT/STAKES/MECHANICS/CTA адаптирован для текста)
-         ig_caption:  "...",   // plain, чуть длиннее, без ссылок
-         tg_hashtag:  "#полезное",
-         ig_hashtags: "#арбитраж #cpa ...",  // 15-25 тегов
-         slides: [
-           { idx: 1, text: "...", visual_intent: "big_number alarm", image_prompt: "..." },
-           { idx: 2, text: "...", visual_intent: "text_card", image_prompt: "..." },
-           ...
-         ]
-       }
-            ↓
-[VIEWER-WALKTHROUGH — mental pass, как в видео-pipeline]
-            ↓
-PostSlideExecutor (NEW)
-  └── для каждого slide → render PNG 1080×1350 (IG carousel-friendly)
-       brand DNA: blue-deep + yellow, Manrope/Russo One/JetBrains Mono
-       reuse ImagePromptBuilder, vision-verify
-            ↓
-PostBundleAssembler (NEW)
-  └── собирает bundle folder:
-       post_bundles/2026-05-11_topic-slug_HASH/
-         ├── bundle.json
-         ├── tg.md / ig.md / hashtags-*.txt
-         └── slide_01.png ... slide_07.png
-            ↓
-PostQA (NEW, analog RenderQA)
-  └── vision-check: slides match topic, brand DNA preserved, text legibility OK
-            ↓
-OUTPUT
-  └── ready bundle → SMM picks up manually
+RSS traffnews.com  →  Make.com сценарий:
+    1. Fetch article HTML
+    2. OpenAI (PostDirector промпт) → JSON brief с slides[5-10]
+    3. Replicate (Recraft v3) → retrofuture AI-фон
+    4. Iterator: для каждого slide → APITemplate.io render HTML→PNG
+    5. Aggregator → массив PNG
+    6. Telegram Bot API sendMediaGroup → пост в @traffnews
 ```
 
-## HARD RULES — что применимо из SMM CLAUDE.md к нашему пайплайну
-
-1. **Темы — только traffnews.com.** Не выдумывать generic SMM-темы. Workflow: traffnews.com → 1-2 кандидата → fetch → research.
-2. **Только русский в captions.** Phonetic anglicisms: `Гугл{Google}`, `Фейсбук{Facebook}`. TTS не нужен (нет аудио), но в IG/TG-caption то же правило для читабельности — англиц лет на 30, кириллица читается мгновенно.
-3. **NO fabricated facts.** Каждое утверждение в caption — прямо из источника. Числа — реальные. Никаких выдуманных ROI / реакций регуляторов.
-4. **5-block structure (адаптировано для текста):**
-   - **HOOK** — первая строка, эмодзи + контроверсия / число / опасность / возможность
-   - **CONTEXT** — 1-2 строки, что произошло, факты
-   - **STAKES** — почему важно арбитражнику (удар по кошельку / трафику)
-   - **MECHANICS** — 2-3 actionable шага с цифрами
-   - **CTA** — «Подробный разбор на traffnews.com → [link]»
-5. **Per-sentence clarity-check.** Те же 7 правил (длина ≤18 слов, без канцелярита, числа с единицами, ...) применяются к caption'ам.
-6. **Verify-or-reject для assets.** Если slide image не отрендерился / brand_logo не найден — REJECT shot, не silent fallback.
-7. **Eyes-check после рендера.** Vision-API проверяет intent, но финально — человеческий взгляд на bundle перед «готово».
-
-## Что НЕ применимо (что отличает нас от видео)
-
-- ❌ ElevenLabs TTS (нет аудио в bundle)
-- ❌ Hedra avatar (карусель-карточки не avatar-портреты, хотя hero-slide с avatar — идея для v3)
-- ❌ AssGenerator burn-in (нет видео-субтитров)
-- ❌ Caption-zone y>1440 (это про видео; для static 1080×1350 свои inviolable zones — см. `docs/post-pipeline.md`)
-- ❌ shot_list с таймкодами (slides не по таймлайну, они независимы)
+Полная диаграмма + схемы данных — [`docs/architecture-make.md`](./docs/architecture-make.md).
 
 ## Где живёт что
 
 | Артефакт | Где |
 |---|---|
-| Java-код нового pipeline | `D:\Prog\SMM\scripts\java\src\main\java\com\traffnews\smm\post\` |
-| Тесты | `D:\Prog\SMM\scripts\java\src\test\java\com\traffnews\smm\post\` |
-| Bundle-output (генерируемые posts) | `D:\Prog\SMM\post_bundles\<timestamp>_<slug>_<hash>\` (gitignored) |
-| Спецификации | `D:\Prog\Постинг\docs\*.md` |
-| Future publication spec | `D:\Prog\Постинг\docs\v2-publication\*.md` |
-| Hard rules common to all SMM | `D:\Prog\SMM\CLAUDE.md` (НЕ дублировать здесь) |
+| Сценарий Make (6 нод) | make.com → аккаунт пользователя |
+| 9 HTML-шаблонов слайдов | apitemplate.io → аккаунт пользователя |
+| API-ключи (OpenAI, Replicate, APITemplate, Telegram Bot) | Спрятаны в Make Connections |
+| **Готовый HTML-код шаблонов** (под копипаст) | `docs/slide-templates/*.html` (в этой папке) |
+| Бренд-конфиг (цвета, шрифты, anchors) | `docs/brand-dna.md` (в этой папке) |
+| PostDirector OpenAI-промпт | `docs/director-prompt-article.md` (в этой папке) |
+| Визуальные референсы | `preview/*.svg`, `preview/slide-02-hybrid-v2.png` |
+| Pixelarticons icon pack (для inline-SVG в HTML) | `preview/pixelarticons/svg/` |
+
+## HARD RULES (применимы из SMM-проекта)
+
+Хотя кода нет, **контентные правила** из `D:\Prog\SMM\CLAUDE.md` применимы к промпту PostDirector в OpenAI-ноде:
+
+1. **Темы — только с traffnews.com.** Не выдумывать generic SMM-темы.
+2. **Только русский в captions.** Phonetic anglicisms: `Гугл{Google}`, `Фейсбук{Facebook}` — для читабельности на мобильном.
+3. **NO fabricated facts.** Каждое утверждение — прямо из источника статьи. Числа реальные.
+4. **5-block caption structure**: HOOK / CONTEXT / STAKES («Из-за этого…») / MECHANICS («собрали…») / CTA с обязательной `<a href>` ссылкой на статью.
+5. **1024 символа лимит TG-caption** — иначе пост обрезается.
+
+Все эти правила уже закодированы в `docs/director-prompt-article.md` — этот промпт скармливается OpenAI-ноде в Make как есть.
 
 ## Какой файл открывать под какую задачу
 
-| Задача | Открывай |
+| Задача | Файл |
 |---|---|
-| Понять flow от input до bundle | `docs/post-pipeline.md` |
-| Узнать точный формат bundle / file naming | `docs/bundle-spec.md` |
-| Что добавляется в SMM Java, что переиспользуется | `docs/integration-plan.md` |
-| Brand voice / fabrication policy / phonetic anglicisms | `D:\Prog\SMM\CLAUDE.md` (источник правды) |
-| Спека публикации (v2) | `docs/v2-publication/` |
+| Понять как всё устроено end-to-end | `docs/architecture-make.md` |
+| Настроить Make + APITemplate с нуля | `docs/setup-guide.md` |
+| Создать HTML-шаблон в APITemplate | `docs/slide-templates/*.html` + `docs/brand-dna.md` |
+| Промпт для OpenAI ноды | `docs/director-prompt-article.md` |
+| Brand voice / fabrication / phonetic rules | `D:\Prog\SMM\CLAUDE.md` (source of truth) |
+| Другие типы постов (vacancies/digest/...) | `docs/types-roadmap.md` (deferred) |
+| Спека автопубликации в Dashboard (v3) | `docs/v2-publication/` (deferred) |
 
 ## Do / Don't
 
 ✅ Делать:
-- Новый код — Java, package `com.traffnews.smm.post.*`
-- Переиспользовать `TopicResearcher`, `ImagePromptBuilder`, brand DNA из существующего SMM
-- Bundle = self-contained папка (можно перенести / архивировать / отправить)
-- Все captions через clarity-check (per-sentence, 7 правил)
-- Анализ источника = traffnews.com article, не выдумка
-- Vision-verify каждого slide до маркировки bundle как ready
+- Писать/обновлять HTML-шаблоны в `docs/slide-templates/`
+- Обновлять `docs/director-prompt-article.md` если меняется промпт для PostDirector
+- Использовать `preview/` SVG-прототипы как визуальный референс при дизайне HTML-шаблонов
+- Сохранять Brand DNA invariants (палитра, anchors, шрифты) при создании новых шаблонов
+- Anti-fabrication: каждое утверждение от Director'а — из источника
 
 ❌ Не делать:
-- Python-код для нового pipeline (Java-only convention)
-- Дублировать HARD RULES из `D:\Prog\SMM\CLAUDE.md` сюда (single source of truth)
-- Bundle с partial output (если 3 из 7 slides упали — bundle = failed, не shippable)
-- Публикацию в TG/IG в v1 (это v2, см. `docs/v2-publication/`)
-- Прямой anthropic/openai API ключи (использовать существующий `.env` SMM-проекта)
+- Писать Java/Python/Node код для самого pipeline
+- Создавать папки `D:\Prog\SMM\scripts\java\...\post\` (этот план отменён)
+- Дублировать HARD RULES сюда (источник — `D:\Prog\SMM\CLAUDE.md`)
+- Менять архитектуру без явного запроса пользователя (мы уже сделали 8+ pivot'ов, фиксируемся на Make+APITemplate)
+
+## Состояние на 2026-05-11
+
+- ✅ Архитектура зафиксирована: Make + APITemplate.io + Replicate + OpenAI + Telegram
+- ✅ PoC валидирован: retrofuture AI-фон (Recraft v3) + SVG content-layer гибрид работает (`preview/slide-02-hybrid-v2.png`)
+- ✅ Brand DNA задокументирован
+- ✅ PostDirector промпт финализирован
+- 🟡 HTML-шаблоны для APITemplate — 1 из 9 готов (big_number), остальные 8 — TODO
+- 🟡 Make-сценарий — не собран ещё
+- 🟡 API-ключи — частично готовы (OpenAI + Replicate в `D:\Prog\SMM\.env`), Telegram Bot Token — TODO
+
+## Следующий шаг
+
+1. Пользователь регистрируется на make.com + apitemplate.io
+2. Создаёт первый HTML-шаблон в APITemplate (slide-02-big-number) — копипаст из `docs/slide-templates/slide-02-big-number.html`
+3. Тестовый рендер через API Console APITemplate — убеждаемся что результат идентичен `preview/slide-02-hybrid-v2.png`
+4. Если ОК — пишем остальные 8 шаблонов, собираем Make-сценарий
