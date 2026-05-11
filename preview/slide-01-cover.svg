@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="1080" height="1350">
+  <defs>
+    <radialGradient id="bgGlow" cx="540" cy="600" r="700">
+      <stop offset="0%" stop-color="#5b2a8f" stop-opacity="0.85"/>
+      <stop offset="60%" stop-color="#2a154d" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#0c0620" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1"/>
+    </pattern>
+    <pattern id="dotMatrix" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="10" cy="10" r="1" fill="#ffffff" fill-opacity="0.18"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1080" height="1350" fill="#1a0d3a"/>
+  <rect width="1080" height="1350" fill="url(#bgGlow)"/>
+  <rect width="1080" height="1350" fill="url(#grid)"/>
+
+  <!-- Top header -->
+  <text x="60" y="80" font-family="'Courier New', monospace" font-size="26" fill="#ffffff" font-weight="bold">Сокращения 2026</text>
+  <text x="1020" y="80" font-family="'Courier New', monospace" font-size="26" fill="#ffffff" font-weight="bold" text-anchor="end">2026</text>
+
+  <!-- Decorative AI silhouette suggestion: floating binary fragments -->
+  <g font-family="'Courier New', monospace" font-size="18" fill="#ffffff" fill-opacity="0.18">
+    <text x="80" y="220">10110011</text>
+    <text x="280" y="260">00101011</text>
+    <text x="480" y="240">11100110</text>
+    <text x="700" y="280">01001100</text>
+    <text x="880" y="220">10101110</text>
+    <text x="120" y="320">011010</text>
+    <text x="780" y="340">110010</text>
+  </g>
+
+  <!-- Large dot-matrix area as photo placeholder -->
+  <rect x="0" y="380" width="1080" height="560" fill="url(#dotMatrix)"/>
+
+  <!-- Black diagonal band with title -->
+  <g transform="rotate(-6 540 670)">
+    <rect x="-40" y="490" width="1160" height="360" fill="#000000"/>
+  </g>
+
+  <!-- Title — large, bold, white -->
+  <g transform="rotate(-6 540 670)">
+    <text x="540" y="620" font-family="Impact, 'Arial Black', sans-serif" font-size="160" fill="#ffffff" font-weight="900" letter-spacing="-3" text-anchor="middle">ИИ ПРОТИВ</text>
+    <text x="540" y="790" font-family="Impact, 'Arial Black', sans-serif" font-size="160" fill="#ffffff" font-weight="900" letter-spacing="-3" text-anchor="middle">ОФИСА</text>
+  </g>
+
+  <!-- Pixelarticons: memory-stick + brackets -->
+  <g transform="translate(820 1080) scale(4.5)" fill="#ffffff">
+    <path d="M3 4h18v2H3zM1 6h2v3H1zm0 5h2v7H1zm20 0h2v7h-2zM3 9h2v2H3zm16 0h2v2h-2zm2-3h2v3h-2zM3 18h18v2H3zm0-4h18v2H3zm2 2h2v2H5zm4 0h2v2H9zm4 0h2v2h-2zm4 0h2v2h-2zM7 8h2v4H7zm4 0h2v4h-2zm4 0h2v4h-2z"/>
+  </g>
+  <g transform="translate(700 1150) scale(3)" fill="#e8f045">
+    <path d="M5 4h4v2H5zm14 0h-4v2h4zM5 20h4v-2H5zm14 0h-4v-2h4zM3 6h2v12H3zm18 0h-2v12h2z"/>
+  </g>
+
+  <!-- Footer -->
+  <g transform="translate(60 1270)">
+    <rect x="0" y="0" width="120" height="50" rx="25" fill="#ffffff"/>
+    <text x="60" y="35" font-family="Inter, Arial, sans-serif" font-size="24" fill="#000000" font-weight="bold" text-anchor="middle">1/7</text>
+  </g>
+  <text x="200" y="1305" font-family="Inter, Arial, sans-serif" font-size="22" fill="#ffffff" opacity="0.85">Подробнее на traffnews.com</text>
+  <g transform="translate(820 1270)">
+    <rect x="0" y="0" width="200" height="50" rx="25" fill="#ffffff"/>
+    <text x="100" y="35" font-family="Inter, Arial, sans-serif" font-size="24" fill="#000000" font-weight="900" text-anchor="middle">TRAFFNEWS</text>
+  </g>
+</svg>

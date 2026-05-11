@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="1080" height="1350">
+  <defs>
+    <radialGradient id="bg4" cx="540" cy="700" r="650">
+      <stop offset="0%" stop-color="#5b2a8f" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#0c0620" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid4" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1080" height="1350" fill="#1a0d3a"/>
+  <rect width="1080" height="1350" fill="url(#bg4)"/>
+  <rect width="1080" height="1350" fill="url(#grid4)"/>
+
+  <text x="60" y="80" font-family="'Courier New', monospace" font-size="26" fill="#ffffff" font-weight="bold">Сокращения 2026</text>
+  <text x="1020" y="80" font-family="'Courier New', monospace" font-size="26" fill="#ffffff" font-weight="bold" text-anchor="end">2026</text>
+
+  <!-- Section title — two lines, bigger letterspacing -->
+  <text x="60" y="220" font-family="Impact, 'Arial Black', sans-serif" font-size="92" fill="#ffffff" font-weight="900" letter-spacing="-2">КТО АНОНСИРОВАЛ</text>
+  <text x="60" y="310" font-family="Impact, 'Arial Black', sans-serif" font-size="92" fill="#ffffff" font-weight="900" letter-spacing="-2">ОЧЕРЕДЬ</text>
+
+  <rect x="60" y="335" width="220" height="6" fill="#e8f045"/>
+
+  <!-- Card style items: big yellow number on right, company on left -->
+  <g font-family="Inter, Arial, sans-serif">
+    <!-- HSBC -->
+    <text x="60" y="500" font-size="60" fill="#ffffff" font-weight="900">HSBC</text>
+    <text x="60" y="555" font-size="28" fill="#ffffff" font-weight="400" opacity="0.85">британский банк</text>
+    <text x="1020" y="540" font-size="100" fill="#e8f045" font-weight="900" text-anchor="end" letter-spacing="-3">20 000</text>
+    <text x="1020" y="580" font-size="24" fill="#ffffff" font-weight="500" text-anchor="end" opacity="0.85">ролей под нож</text>
+    <line x1="60" y1="640" x2="1020" y2="640" stroke="#ffffff" stroke-opacity="0.15" stroke-width="2"/>
+
+    <!-- Meta -->
+    <text x="60" y="730" font-size="60" fill="#ffffff" font-weight="900">Meta</text>
+    <text x="60" y="785" font-size="28" fill="#ffffff" font-weight="400" opacity="0.85">Facebook, Instagram, WhatsApp</text>
+    <text x="1020" y="770" font-size="100" fill="#e8f045" font-weight="900" text-anchor="end" letter-spacing="-3">~8 000</text>
+    <text x="1020" y="810" font-size="24" fill="#ffffff" font-weight="500" text-anchor="end" opacity="0.85">человек</text>
+    <line x1="60" y1="870" x2="1020" y2="870" stroke="#ffffff" stroke-opacity="0.15" stroke-width="2"/>
+
+    <!-- PayPal -->
+    <text x="60" y="960" font-size="60" fill="#ffffff" font-weight="900">PayPal</text>
+    <text x="60" y="1015" font-size="28" fill="#ffffff" font-weight="400" opacity="0.85">платёжный гигант</text>
+    <text x="1020" y="1000" font-size="100" fill="#e8f045" font-weight="900" text-anchor="end" letter-spacing="-3">20%</text>
+    <text x="1020" y="1040" font-size="24" fill="#ffffff" font-weight="500" text-anchor="end" opacity="0.85">штата за 2-3 года</text>
+  </g>
+
+  <!-- Pixelarticons: chart-column-decreasing (показывает падение штата) -->
+  <g transform="translate(60 1130) scale(2.5)" fill="#e8f045">
+    <path d="M4 20h18v2H4zM2 2h2v18H2zm5 4h2v12H7zm5 4h2v8h-2zm5 4h2v4h-2z"/>
+  </g>
+  <text x="140" y="1180" font-family="Inter, Arial, sans-serif" font-size="24" fill="#ffffff" opacity="0.8" font-weight="500">это только публично объявленные</text>
+
+  <!-- Footer -->
+  <g transform="translate(60 1270)">
+    <rect x="0" y="0" width="120" height="50" rx="25" fill="#ffffff"/>
+    <text x="60" y="35" font-family="Inter, Arial, sans-serif" font-size="24" fill="#000000" font-weight="bold" text-anchor="middle">4/7</text>
+  </g>
+  <text x="200" y="1305" font-family="Inter, Arial, sans-serif" font-size="22" fill="#ffffff" opacity="0.85">Подробнее на traffnews.com</text>
+  <g transform="translate(820 1270)">
+    <rect x="0" y="0" width="200" height="50" rx="25" fill="#ffffff"/>
+    <text x="100" y="35" font-family="Inter, Arial, sans-serif" font-size="24" fill="#000000" font-weight="900" text-anchor="middle">TRAFFNEWS</text>
+  </g>
+</svg>

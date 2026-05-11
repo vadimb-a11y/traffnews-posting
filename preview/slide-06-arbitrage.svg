@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="1080" height="1350">
+  <defs>
+    <radialGradient id="bg6" cx="540" cy="700" r="650">
+      <stop offset="0%" stop-color="#5b2a8f" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#0c0620" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid6" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1080" height="1350" fill="#1a0d3a"/>
+  <rect width="1080" height="1350" fill="url(#bg6)"/>
+  <rect width="1080" height="1350" fill="url(#grid6)"/>
+
+  <text x="60" y="80" font-family="'Courier New', monospace" font-size="26" fill="#ffffff" font-weight="bold">Сокращения 2026</text>
+  <text x="1020" y="80" font-family="'Courier New', monospace" font-size="26" fill="#ffffff" font-weight="bold" text-anchor="end">2026</text>
+
+  <!-- Section title overlaid on yellow accent block -->
+  <rect x="0" y="200" width="700" height="130" fill="#e8f045"/>
+  <text x="60" y="290" font-family="Impact, 'Arial Black', sans-serif" font-size="86" fill="#000000" font-weight="900" letter-spacing="-2">ЭТО УЖЕ В</text>
+  <rect x="0" y="335" width="780" height="130" fill="#e8f045"/>
+  <text x="60" y="425" font-family="Impact, 'Arial Black', sans-serif" font-size="86" fill="#000000" font-weight="900" letter-spacing="-2">АРБИТРАЖЕ</text>
+
+  <!-- Bullets with arrow markers -->
+  <g font-family="Inter, Arial, sans-serif">
+    <text x="60" y="600" font-size="40" fill="#e8f045" font-weight="900">→</text>
+    <text x="120" y="600" font-size="36" fill="#ffffff" font-weight="700">Креативы — AI рисует и пишет</text>
+    <text x="120" y="640" font-size="26" fill="#ffffff" font-weight="400" opacity="0.7">Midjourney, GPT, Recraft — один промпт = пачка вариантов</text>
+
+    <text x="60" y="745" font-size="40" fill="#e8f045" font-weight="900">→</text>
+    <text x="120" y="745" font-size="36" fill="#ffffff" font-weight="700">Менеджмент кампаний — AI-optimizer'ы</text>
+    <text x="120" y="785" font-size="26" fill="#ffffff" font-weight="400" opacity="0.7">авто-биддинг, авто-таргетинг — без участия медиабайера</text>
+
+    <text x="60" y="890" font-size="40" fill="#e8f045" font-weight="900">→</text>
+    <text x="120" y="890" font-size="36" fill="#ffffff" font-weight="700">Связки и трекинг — AI auto-routing</text>
+    <text x="120" y="930" font-size="26" fill="#ffffff" font-weight="400" opacity="0.7">трекеры сами раскладывают трафик по топ-EPC связкам</text>
+
+    <text x="60" y="1035" font-size="40" fill="#e8f045" font-weight="900">→</text>
+    <text x="120" y="1035" font-size="36" fill="#ffffff" font-weight="700">Один человек заменяет команду из 3</text>
+    <text x="120" y="1075" font-size="26" fill="#ffffff" font-weight="400" opacity="0.7">соло-арбитражники с AI-стеком — новая норма</text>
+  </g>
+
+  <!-- Pixelarticons: pointer (cursor) -->
+  <g transform="translate(880 1100) scale(5)" fill="#ffffff">
+    <path d="M17 9h2v3h-2zm-4-2h2v4h-2zM9 3h2v8H9zM5 3h2v10H5zm14 6h2v2h-2zm-4-2h2v2h-2zm-4 0h2v2h-2zM7 1h2v2H7zM3 11h2v2H3zm-2 2h2v2H1zm0 2h2v2H1zm2 2h2v2H3zm2 2h2v2H5zm2 2h12v2H7zm12-2h2v2h-2zm2-8h2v8h-2zM5 13h2v2H5zm2 2h2v2H7z"/>
+  </g>
+
+  <g transform="translate(60 1270)">
+    <rect x="0" y="0" width="120" height="50" rx="25" fill="#ffffff"/>
+    <text x="60" y="35" font-family="Inter, Arial, sans-serif" font-size="24" fill="#000000" font-weight="bold" text-anchor="middle">6/7</text>
+  </g>
+  <text x="200" y="1305" font-family="Inter, Arial, sans-serif" font-size="22" fill="#ffffff" opacity="0.85">Подробнее на traffnews.com</text>
+  <g transform="translate(820 1270)">
+    <rect x="0" y="0" width="200" height="50" rx="25" fill="#ffffff"/>
+    <text x="100" y="35" font-family="Inter, Arial, sans-serif" font-size="24" fill="#000000" font-weight="900" text-anchor="middle">TRAFFNEWS</text>
+  </g>
+</svg>

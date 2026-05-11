@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="1080" height="1350">
+  <defs>
+    <radialGradient id="bg7" cx="540" cy="500" r="700">
+      <stop offset="0%" stop-color="#7a3fa3" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#0c0620" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid7" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1080" height="1350" fill="#1a0d3a"/>
+  <rect width="1080" height="1350" fill="url(#bg7)"/>
+  <rect width="1080" height="1350" fill="url(#grid7)"/>
+
+  <text x="60" y="80" font-family="'Courier New', monospace" font-size="26" fill="#ffffff" font-weight="bold">Сокращения 2026</text>
+  <text x="1020" y="80" font-family="'Courier New', monospace" font-size="26" fill="#ffffff" font-weight="bold" text-anchor="end">2026</text>
+
+  <!-- Huge question -->
+  <text x="60" y="260" font-family="Impact, 'Arial Black', sans-serif" font-size="160" fill="#ffffff" font-weight="900" letter-spacing="-4">ЧТО</text>
+  <text x="60" y="420" font-family="Impact, 'Arial Black', sans-serif" font-size="160" fill="#e8f045" font-weight="900" letter-spacing="-4">ДЕЛАТЬ?</text>
+
+  <!-- 3 action items -->
+  <g font-family="Inter, Arial, sans-serif">
+    <text x="60" y="600" font-size="44" fill="#e8f045" font-weight="900">01</text>
+    <text x="150" y="600" font-size="36" fill="#ffffff" font-weight="700">Освоить AI-tools прямо сейчас</text>
+    <text x="150" y="645" font-size="26" fill="#ffffff" font-weight="400" opacity="0.75">не «как-нибудь потом» — каждый месяц отставания дороже</text>
+
+    <text x="60" y="760" font-size="44" fill="#e8f045" font-weight="900">02</text>
+    <text x="150" y="760" font-size="36" fill="#ffffff" font-weight="700">Сместиться в стратегию и креатив</text>
+    <text x="150" y="805" font-size="26" fill="#ffffff" font-weight="400" opacity="0.75">рутина уходит к AI, ценность — там где её ещё нет</text>
+
+    <text x="60" y="920" font-size="44" fill="#e8f045" font-weight="900">03</text>
+    <text x="150" y="920" font-size="36" fill="#ffffff" font-weight="700">Следить за рынком</text>
+    <text x="150" y="965" font-size="26" fill="#ffffff" font-weight="400" opacity="0.75">каждый месяц новые кейсы — TRAFFNEWS разбирает все</text>
+  </g>
+
+  <!-- Pixelarticons: arrow-right (next-action direction) -->
+  <g transform="translate(880 950) scale(4)" fill="#e8f045">
+    <path d="M4 11v2h16v-2zm12 2v2h2v-2zm-2 2v2h2v-2zm-2 2v2h2v-2zm4-6V9h2v2z"/>
+    <path d="M14 15V7h2v8zm-2 2V5h2v12z"/>
+  </g>
+
+  <!-- CTA box -->
+  <rect x="60" y="1060" width="960" height="140" fill="#e8f045" rx="8"/>
+  <text x="540" y="1115" font-family="Impact, 'Arial Black', sans-serif" font-size="40" fill="#000000" font-weight="900" text-anchor="middle">ПОДПИШИСЬ НА TRAFFNEWS</text>
+  <text x="540" y="1165" font-family="Inter, Arial, sans-serif" font-size="28" fill="#000000" font-weight="500" text-anchor="middle">чтобы не пропустить когда придёт твоя ниша</text>
+
+  <g transform="translate(60 1270)">
+    <rect x="0" y="0" width="120" height="50" rx="25" fill="#ffffff"/>
+    <text x="60" y="35" font-family="Inter, Arial, sans-serif" font-size="24" fill="#000000" font-weight="bold" text-anchor="middle">7/7</text>
+  </g>
+  <text x="200" y="1305" font-family="Inter, Arial, sans-serif" font-size="22" fill="#ffffff" opacity="0.85">Подробнее на traffnews.com</text>
+  <g transform="translate(820 1270)">
+    <rect x="0" y="0" width="200" height="50" rx="25" fill="#ffffff"/>
+    <text x="100" y="35" font-family="Inter, Arial, sans-serif" font-size="24" fill="#000000" font-weight="900" text-anchor="middle">TRAFFNEWS</text>
+  </g>
+</svg>

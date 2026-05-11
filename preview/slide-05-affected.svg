@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="1080" height="1350">
+  <defs>
+    <radialGradient id="bg5" cx="540" cy="700" r="650">
+      <stop offset="0%" stop-color="#5b2a8f" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#0c0620" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid5" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1080" height="1350" fill="#1a0d3a"/>
+  <rect width="1080" height="1350" fill="url(#bg5)"/>
+  <rect width="1080" height="1350" fill="url(#grid5)"/>
+
+  <text x="60" y="80" font-family="'Courier New', monospace" font-size="26" fill="#ffffff" font-weight="bold">Сокращения 2026</text>
+  <text x="1020" y="80" font-family="'Courier New', monospace" font-size="26" fill="#ffffff" font-weight="bold" text-anchor="end">2026</text>
+
+  <text x="60" y="220" font-family="Impact, 'Arial Black', sans-serif" font-size="92" fill="#ffffff" font-weight="900" letter-spacing="-2">КТО ПЕРВЫЕ</text>
+  <text x="60" y="310" font-family="Impact, 'Arial Black', sans-serif" font-size="92" fill="#ffffff" font-weight="900" letter-spacing="-2">ПОД УДАРОМ</text>
+  <rect x="60" y="335" width="240" height="6" fill="#e8f045"/>
+
+  <!-- Numbered items: yellow number circle + position name + brief description -->
+  <g font-family="Inter, Arial, sans-serif">
+    <!-- Item 1 -->
+    <circle cx="120" cy="490" r="55" fill="#e8f045"/>
+    <text x="120" y="510" font-size="52" fill="#000000" font-weight="900" text-anchor="middle">1</text>
+    <text x="220" y="480" font-size="48" fill="#ffffff" font-weight="900">Support / customer service</text>
+    <text x="220" y="525" font-size="26" fill="#ffffff" font-weight="400" opacity="0.85">первая линия ушла в чат-ботов</text>
+
+    <!-- Item 2 -->
+    <circle cx="120" cy="650" r="55" fill="#e8f045"/>
+    <text x="120" y="670" font-size="52" fill="#000000" font-weight="900" text-anchor="middle">2</text>
+    <text x="220" y="640" font-size="48" fill="#ffffff" font-weight="900">Back office</text>
+    <text x="220" y="685" font-size="26" fill="#ffffff" font-weight="400" opacity="0.85">бухгалтерия, HR-операционка, отчёты</text>
+
+    <!-- Item 3 -->
+    <circle cx="120" cy="810" r="55" fill="#e8f045"/>
+    <text x="120" y="830" font-size="52" fill="#000000" font-weight="900" text-anchor="middle">3</text>
+    <text x="220" y="800" font-size="48" fill="#ffffff" font-weight="900">Middle management</text>
+    <text x="220" y="845" font-size="26" fill="#ffffff" font-weight="400" opacity="0.85">меньше людей — меньше начальников</text>
+
+    <!-- Item 4 -->
+    <circle cx="120" cy="970" r="55" fill="#e8f045"/>
+    <text x="120" y="990" font-size="52" fill="#000000" font-weight="900" text-anchor="middle">4</text>
+    <text x="220" y="960" font-size="48" fill="#ffffff" font-weight="900">Junior-инженеры</text>
+    <text x="220" y="1005" font-size="26" fill="#ffffff" font-weight="400" opacity="0.85">Copilot закрывает большую часть задач</text>
+  </g>
+
+  <!-- Pixelarticons: zap (energy / удар) -->
+  <g transform="translate(880 1100) scale(5)" fill="#ffffff">
+    <path d="M13 12h6v2h-2v2h-2v2h-2v2h-2v-2H9v-2H7v-2H5v-2h6V4h2v8Z"/>
+  </g>
+
+  <g transform="translate(60 1270)">
+    <rect x="0" y="0" width="120" height="50" rx="25" fill="#ffffff"/>
+    <text x="60" y="35" font-family="Inter, Arial, sans-serif" font-size="24" fill="#000000" font-weight="bold" text-anchor="middle">5/7</text>
+  </g>
+  <text x="200" y="1305" font-family="Inter, Arial, sans-serif" font-size="22" fill="#ffffff" opacity="0.85">Подробнее на traffnews.com</text>
+  <g transform="translate(820 1270)">
+    <rect x="0" y="0" width="200" height="50" rx="25" fill="#ffffff"/>
+    <text x="100" y="35" font-family="Inter, Arial, sans-serif" font-size="24" fill="#000000" font-weight="900" text-anchor="middle">TRAFFNEWS</text>
+  </g>
+</svg>
