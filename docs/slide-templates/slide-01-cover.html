@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<!--
+  Slide type: cover
+  Use for: первый слайд карусели (опенер)
+  Reference: preview/slide-01-cover.svg
+  Canvas: 1080×1350
+
+  Variables:
+    {{bg_image_url}}     — URL retrofuture-фона от Replicate
+    {{topic_label}}      — top-left header (e.g. "Сокращения 2026")
+    {{year}}             — top-right header (e.g. "2026")
+    {{title_line_1}}     — первая строка заголовка (CAPS, e.g. "ИИ ПРОТИВ")
+    {{title_line_2}}     — вторая строка заголовка (CAPS, e.g. "ОФИСА")
+    {{page_counter}}     — счётчик (e.g. "1/7")
+-->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@700&display=swap');
+  body { margin: 0; font-family: 'Inter', sans-serif; }
+  .canvas {
+    position: relative; width: 1080px; height: 1350px;
+    background: #1a0d3a; overflow: hidden;
+  }
+  .bg-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .dim-overlay { position: absolute; inset: 0; background: rgba(26, 13, 58, 0.55); }
+  .grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .top-header-left, .top-header-right {
+    position: absolute; top: 60px;
+    font-family: 'JetBrains Mono', monospace; font-size: 26px;
+    font-weight: 700; color: #ffffff;
+  }
+  .top-header-left { left: 60px; }
+  .top-header-right { right: 60px; }
+
+  /* Diagonal black band with title */
+  .title-band {
+    position: absolute;
+    left: -40px; right: -40px;
+    top: 480px; height: 360px;
+    background: #000000;
+    transform: rotate(-6deg);
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+  }
+  .title-line {
+    font-family: 'Anton', Impact, 'Arial Black', sans-serif;
+    font-size: 160px;
+    color: #ffffff;
+    font-weight: 900;
+    letter-spacing: -3px;
+    line-height: 1;
+    margin: 5px 0;
+    text-align: center;
+  }
+
+  /* Decorative pixelarticons — memory-stick + brackets */
+  .deco-1 { position: absolute; right: 80px; top: 1060px; width: 130px; height: 130px; }
+  .deco-1 path { fill: #ffffff; }
+  .deco-2 { position: absolute; right: 240px; top: 1120px; width: 80px; height: 80px; }
+  .deco-2 path { fill: #e8f045; }
+
+  /* Brand anchors */
+  .pill {
+    position: absolute; top: 1270px; height: 50px;
+    background: #ffffff; border-radius: 25px;
+    display: flex; align-items: center; justify-content: center;
+    color: #000000; font-size: 24px;
+  }
+  .pill-left { left: 60px; width: 120px; font-weight: 700; }
+  .pill-right { right: 60px; width: 200px; font-weight: 900; }
+  .footer-text {
+    position: absolute; left: 200px; top: 1290px;
+    font-size: 22px; color: #ffffff; opacity: 0.85;
+  }
+</style>
+</head>
+<body>
+  <div class="canvas">
+    <img class="bg-img" src="{{bg_image_url}}" />
+    <div class="dim-overlay"></div>
+    <div class="grid"></div>
+
+    <div class="top-header-left">{{topic_label}}</div>
+    <div class="top-header-right">{{year}}</div>
+
+    <div class="title-band">
+      <div class="title-line">{{title_line_1}}</div>
+      <div class="title-line">{{title_line_2}}</div>
+    </div>
+
+    <!-- memory-stick -->
+    <svg class="deco-1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M3 4h18v2H3zM1 6h2v3H1zm0 5h2v7H1zm20 0h2v7h-2zM3 9h2v2H3zm16 0h2v2h-2zm2-3h2v3h-2zM3 18h18v2H3zm0-4h18v2H3zm2 2h2v2H5zm4 0h2v2H9zm4 0h2v2h-2zm4 0h2v2h-2zM7 8h2v4H7zm4 0h2v4h-2zm4 0h2v4h-2z"/>
+    </svg>
+    <!-- brackets -->
+    <svg class="deco-2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M5 4h4v2H5zm14 0h-4v2h4zM5 20h4v-2H5zm14 0h-4v-2h4zM3 6h2v12H3zm18 0h-2v12h2z"/>
+    </svg>
+
+    <div class="pill pill-left">{{page_counter}}</div>
+    <div class="footer-text">Подробнее на traffnews.com</div>
+    <div class="pill pill-right">TRAFFNEWS</div>
+  </div>
+</body>
+</html>

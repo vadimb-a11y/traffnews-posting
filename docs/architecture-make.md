@@ -1,4 +1,4 @@
-# Architecture — Make.com + APITemplate.io Cloud Pipeline
+# Architecture — Make.com + HCTI (htmlcsstoimage.com) Cloud Pipeline
 
 Полная картина: сервисы, потоки данных, JSON-схемы, переменные.
 
@@ -92,7 +92,7 @@
 
 Каждый slide имеет:
 - `idx` — номер 1..N
-- `visual_intent` — один из 9 типов, определяет какой template_id в APITemplate
+- `visual_intent` — один из 9 типов, определяет какой HTML-шаблон Make подставит
 - Остальные поля — переменные конкретного шаблона
 
 #### NODE 3 — Replicate: retrofuture background
@@ -121,40 +121,57 @@
 - **Array**: `{{node2.brief.slides}}`
 - На каждой итерации — выполняется NODE 5
 
-#### NODE 5 — APITemplate.io: render slide → PNG
-- **Module**: `HTTP > Make a request` (или APITemplate-нативный модуль если есть в Make)
-- **Method**: POST
-- **URL**: `https://rest.apitemplate.io/v2/create-image?template_id={{template_id_by_intent}}`
-- **Headers**:
-  - `X-API-KEY: {{APITEMPLATE_API_KEY}}`
-  - `Content-Type: application/json`
-- **template_id selector** (Make formula):
-  ```
-  switch(slide.visual_intent,
-    "cover",         "TMPL_COVER_ID",
-    "big_number",    "TMPL_BIG_NUMBER_ID",
-    "quote_block",   "TMPL_QUOTE_ID",
-    "bullet_list",   "TMPL_BULLET_ID",
-    "numbered_list", "TMPL_NUMBERED_ID",
-    "service_list",  "TMPL_SERVICE_ID",
-    "compare_split", "TMPL_COMPARE_ID",
-    "faq",           "TMPL_FAQ_ID",
-    "outro_cta",     "TMPL_OUTRO_ID"
+#### NODE 5 — HCTI: render HTML → PNG
+
+Это **две подноды**: сначала Make строит HTML-строку с подставленными переменными, потом POST в HCTI.
+
+**5a — Build HTML (Make Text Aggregator / Tools > Set Variable):**
+
+Хранение шаблонов в Make. Самый простой способ — **9 переменных сценария** (Scenario settings → Variables), каждая содержит один HTML-шаблон как plain text. При запуске сценария они уже доступны.
+
+В Iterator на каждом шаге используется Make formula:
+```
+{{
+  switch(slide.visual_intent;
+    "cover"; var.TMPL_COVER;
+    "big_number"; var.TMPL_BIG_NUMBER;
+    "quote_block"; var.TMPL_QUOTE;
+    "bullet_list"; var.TMPL_BULLET;
+    "numbered_list"; var.TMPL_NUMBERED;
+    "service_list"; var.TMPL_SERVICE;
+    "compare_split"; var.TMPL_COMPARE;
+    "faq"; var.TMPL_FAQ;
+    "outro_cta"; var.TMPL_OUTRO
   )
-  ```
-- **Body** (зависит от visual_intent, передаём все переменные шаблона):
+}}
+```
+
+Затем `replace()` для подстановки переменных слайда — для каждой переменной {{varname}} в шаблоне Make вызывает функцию `replace(html; "{{varname}}"; slide.varname)`. Это пишется как последовательность функций или через Tools > Compose a string.
+
+**Откуда брать содержимое для Scenario Variables**: копипаст из этого репо, файлы `D:\Prog\Постинг\docs\slide-templates\slide-XX-*.html`. При обновлении шаблона — копипастим обновлённый файл в Scenario Variable. (Альтернатива на v2: push репо в GitHub public, Make делает HTTP GET к raw URL `https://raw.githubusercontent.com/.../slide-XX.html` на каждом прогоне — всегда свежая версия.)
+
+**5b — POST в HCTI:**
+- **Module**: `HTTP > Make a request`
+- **Method**: POST
+- **URL**: `https://hcti.io/v1/image`
+- **Authorization**: Basic Auth → username = `{{HCTI_USER_ID}}`, password = `{{HCTI_API_KEY}}`
+- **Body type**: Raw / JSON
+- **Body**:
   ```json
   {
-    "overrides": [
-      { "name": "bg_image_url", "image_url": "{{node3.bg_image_url}}" },
-      { "name": "page_counter", "text": "{{slide.idx}}/{{node2.brief.slides.length}}" },
-      { "name": "topic_label", "text": "{{node2.brief.topic_label}}" },
-      { "name": "year", "text": "{{node2.brief.year}}" },
-      /* slide-specific: big_number, subline_1, и т.д. */
-    ]
+    "html": "{{constructed_html_body_from_5a}}",
+    "css": "{{constructed_html_style_from_5a}}",
+    "google_fonts": "Anton|Inter:400,500,700,900|JetBrains+Mono:700",
+    "viewport_width": 1080,
+    "viewport_height": 1350,
+    "device_scale": 2
   }
   ```
-- **Output**: `{ "download_url_png": "https://storage.apitemplate.io/output/.../slide.png" }`
+
+Можно сразу присылать **целый HTML с `<style>` внутри** через поле `html` — HCTI разберёт. Тогда подноды 5a достаточно одной.
+
+- **Output**: `{ "url": "https://hcti.io/v1/image/abc-def-...", ... }`
+- Сохраняем `url` в массив для NODE 6
 
 #### NODE 6 — Aggregator + Telegram: send carousel
 - **Aggregator**: собирает все `download_url_png` в массив
@@ -165,11 +182,11 @@
   {
     "chat_id": "@traffnews",
     "media": [
-      { "type": "photo", "media": "https://storage.apitemplate.io/.../slide_01.png", "caption": "{{node2.brief.tg_caption}}", "parse_mode": "HTML" },
-      { "type": "photo", "media": "https://storage.apitemplate.io/.../slide_02.png" },
-      { "type": "photo", "media": "https://storage.apitemplate.io/.../slide_03.png" },
-      { "type": "photo", "media": "https://storage.apitemplate.io/.../slide_04.png" },
-      { "type": "photo", "media": "https://storage.apitemplate.io/.../slide_05.png" }
+      { "type": "photo", "media": "https://hcti.io/v1/image/.../slide_01.png", "caption": "{{node2.brief.tg_caption}}", "parse_mode": "HTML" },
+      { "type": "photo", "media": "https://hcti.io/v1/image/.../slide_02.png" },
+      { "type": "photo", "media": "https://hcti.io/v1/image/.../slide_03.png" },
+      { "type": "photo", "media": "https://hcti.io/v1/image/.../slide_04.png" },
+      { "type": "photo", "media": "https://hcti.io/v1/image/.../slide_05.png" }
     ]
   }
   ```
@@ -184,7 +201,7 @@
 |---|---|---|
 | OpenAI | platform.openai.com/api-keys | `openai-traffnews` |
 | Replicate | replicate.com/account/api-tokens | `replicate-traffnews` |
-| APITemplate.io | apitemplate.io/dashboard → API Integration | `apitemplate-traffnews` |
+| HCTI | htmlcsstoimage.com/dashboard → API Keys (нужны и USER_ID и API_KEY для basic auth) | `hcti-traffnews` |
 | Telegram Bot | @BotFather в Telegram | `telegram-traffnews-bot` |
 
 ## Cost model
@@ -192,22 +209,22 @@
 Per post (1 carousel = 5-10 slides):
 - OpenAI gpt-4o (PostDirector): ~$0.01
 - Replicate Recraft v3 (1 bg per carousel): $0.05
-- APITemplate.io (на free 50 рендеров/мес): $0 если ≤7 постов/мес, иначе $24/мес unlimited
+- HCTI (на free 50 рендеров/мес): $0 если ≤7 постов/мес, иначе $14/мес для 1000 рендеров
 - Make.com (на free 1000 ops/мес): $0 если ≤50 постов/мес, иначе $10.59/мес
 - Telegram: $0
 
 **Total на free tier**: ~$0.06 за пост × 7 постов = $0.42/мес. Реально — заплатишь Replicate $5-10 за месяц.
 
-**Total после free overflow** (50+ постов/мес): ~$35/мес total (APITemplate + Make + APIs).
+**Total после free overflow** (50+ постов/мес): ~$25-30/мес total (HCTI $14 + Make $10.59 + APIs).
 
 ## Failure modes & fallbacks
 
 | Failure | Что делать |
 |---|---|
 | Replicate timeout (60s+) | Retry x1 → fallback на static gradient bg (`{{bg_image_url}} = пустая строка` → CSS gradient в шаблоне) |
-| APITemplate 5xx | Retry x2 → пометить пост failed, alert в Telegram админ-чат |
+| HCTI 5xx | Retry x2 → пометить пост failed, alert в Telegram админ-чат |
 | OpenAI rate limit | Make exponential backoff (нативно поддерживает) |
-| Telegram media too large (>10MB) | На уровне APITemplate выставить quality=80 jpg вместо png |
+| Telegram media too large (>10MB) | На уровне HCTI выставить quality=80 jpg вместо png |
 | Caption >1024 chars | PostDirector промпт уже принуждает лимит; если получит больше → truncate в Make text function |
 
 ## v2 / future

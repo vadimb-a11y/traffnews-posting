@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<!--
+  Slide type: bullet_list
+  Use for: список из 3-5 пунктов
+  Reference: preview/slide-05-affected.svg
+  Canvas: 1080×1350
+
+  Variables:
+    {{bg_image_url}}     — Replicate retrofuture-фон
+    {{topic_label}}      — top-left header
+    {{year}}             — top-right header
+    {{section_title}}    — заголовок секции (CAPS, e.g. "КОГО РЕЖУТ ПЕРВЫМ")
+    {{bullet_1}} ... {{bullet_5}}  — пункты (1-5; пустые скрыть)
+    {{caption_text}}     — мелкая подпись внизу (optional)
+    {{page_counter}}     — счётчик
+-->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@700&display=swap');
+  body { margin: 0; font-family: 'Inter', sans-serif; }
+  .canvas {
+    position: relative; width: 1080px; height: 1350px;
+    background: #1a0d3a; overflow: hidden;
+  }
+  .bg-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .dim-overlay { position: absolute; inset: 0; background: rgba(26, 13, 58, 0.65); }
+  .grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .top-header-left, .top-header-right {
+    position: absolute; top: 60px;
+    font-family: 'JetBrains Mono', monospace; font-size: 26px;
+    font-weight: 700; color: #ffffff;
+  }
+  .top-header-left { left: 60px; }
+  .top-header-right { right: 60px; }
+
+  .section-title {
+    position: absolute; left: 60px; top: 170px;
+    font-family: 'Anton', Impact, sans-serif; font-size: 80px;
+    color: #ffffff; font-weight: 900;
+    letter-spacing: -2px; line-height: 1.05;
+    max-width: 960px;
+  }
+  .title-underline {
+    position: absolute; left: 60px; top: 305px;
+    width: 220px; height: 6px; background: #e8f045;
+  }
+
+  .bullets {
+    position: absolute; left: 60px; right: 60px; top: 410px;
+  }
+  .bullet {
+    display: flex; align-items: flex-start;
+    margin-bottom: 38px;
+    font-size: 38px; color: #ffffff; font-weight: 500;
+    line-height: 1.3;
+  }
+  .bullet-marker {
+    color: #e8f045; font-weight: 900;
+    margin-right: 24px; flex-shrink: 0;
+    font-size: 44px; line-height: 1;
+  }
+  .bullet:empty { display: none; }
+
+  .caption {
+    position: absolute; left: 60px; right: 60px;
+    bottom: 130px;
+    font-size: 24px; color: #ffffff;
+    opacity: 0.8; font-weight: 500;
+  }
+
+  .pill {
+    position: absolute; top: 1270px; height: 50px;
+    background: #ffffff; border-radius: 25px;
+    display: flex; align-items: center; justify-content: center;
+    color: #000000; font-size: 24px;
+  }
+  .pill-left { left: 60px; width: 120px; font-weight: 700; }
+  .pill-right { right: 60px; width: 200px; font-weight: 900; }
+  .footer-text {
+    position: absolute; left: 200px; top: 1290px;
+    font-size: 22px; color: #ffffff; opacity: 0.85;
+  }
+</style>
+</head>
+<body>
+  <div class="canvas">
+    <img class="bg-img" src="{{bg_image_url}}" />
+    <div class="dim-overlay"></div>
+    <div class="grid"></div>
+
+    <div class="top-header-left">{{topic_label}}</div>
+    <div class="top-header-right">{{year}}</div>
+
+    <div class="section-title">{{section_title}}</div>
+    <div class="title-underline"></div>
+
+    <div class="bullets">
+      <div class="bullet"><span class="bullet-marker">→</span><span>{{bullet_1}}</span></div>
+      <div class="bullet"><span class="bullet-marker">→</span><span>{{bullet_2}}</span></div>
+      <div class="bullet"><span class="bullet-marker">→</span><span>{{bullet_3}}</span></div>
+      <div class="bullet"><span class="bullet-marker">→</span><span>{{bullet_4}}</span></div>
+      <div class="bullet"><span class="bullet-marker">→</span><span>{{bullet_5}}</span></div>
+    </div>
+
+    <div class="caption">{{caption_text}}</div>
+
+    <div class="pill pill-left">{{page_counter}}</div>
+    <div class="footer-text">Подробнее на traffnews.com</div>
+    <div class="pill pill-right">TRAFFNEWS</div>
+  </div>
+</body>
+</html>

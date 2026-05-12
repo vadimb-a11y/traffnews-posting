@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<!--
+  Slide type: outro_cta
+  Use for: финальный слайд карусели (CTA + action items)
+  Reference: preview/slide-07-outro.svg
+  Canvas: 1080×1350
+
+  Variables:
+    {{bg_image_url}}      — Replicate retrofuture-фон
+    {{topic_label}}       — top-left header
+    {{year}}              — top-right header
+    {{question_1}}        — первая строка вопроса (CAPS, e.g. "ЧТО")
+    {{question_2}}        — вторая строка (CAPS, e.g. "ДЕЛАТЬ?") — рендерится жёлтым
+    {{action_1_title}}    — заголовок первого действия
+    {{action_1_subtitle}} — пояснение первого действия
+    {{action_2_title}}    — второй
+    {{action_2_subtitle}} —
+    {{action_3_title}}    — третий
+    {{action_3_subtitle}} —
+    {{cta_title}}         — главный CTA (e.g. "ПОДПИШИСЬ НА TRAFFNEWS")
+    {{cta_subtitle}}      — подпись CTA
+    {{page_counter}}      — счётчик
+-->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@700&display=swap');
+  body { margin: 0; font-family: 'Inter', sans-serif; }
+  .canvas {
+    position: relative; width: 1080px; height: 1350px;
+    background: #1a0d3a; overflow: hidden;
+  }
+  .bg-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .dim-overlay { position: absolute; inset: 0; background: rgba(26, 13, 58, 0.65); }
+  .grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .top-header-left, .top-header-right {
+    position: absolute; top: 60px;
+    font-family: 'JetBrains Mono', monospace; font-size: 26px;
+    font-weight: 700; color: #ffffff;
+  }
+  .top-header-left { left: 60px; }
+  .top-header-right { right: 60px; }
+
+  .question-1, .question-2 {
+    position: absolute; left: 60px;
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: 160px; font-weight: 900;
+    letter-spacing: -4px; line-height: 1;
+  }
+  .question-1 { top: 150px; color: #ffffff; }
+  .question-2 { top: 310px; color: #e8f045; }
+
+  .action {
+    position: absolute; left: 60px; right: 60px;
+    display: flex; align-items: flex-start;
+  }
+  .action-1 { top: 540px; }
+  .action-2 { top: 700px; }
+  .action-3 { top: 860px; }
+  .action-num {
+    color: #e8f045; font-size: 44px; font-weight: 900;
+    margin-right: 32px; flex-shrink: 0;
+    font-family: 'Anton', sans-serif;
+  }
+  .action-text { flex: 1; }
+  .action-title { color: #ffffff; font-size: 34px; font-weight: 700; line-height: 1.2; }
+  .action-subtitle { color: #ffffff; opacity: 0.75; font-size: 24px; font-weight: 400; margin-top: 6px; }
+
+  /* Decorative arrow-right yellow */
+  .deco-arrow { position: absolute; right: 60px; top: 880px; width: 120px; height: 120px; }
+  .deco-arrow path { fill: #e8f045; }
+
+  /* CTA box */
+  .cta-box {
+    position: absolute; left: 60px; right: 60px;
+    top: 1050px; height: 150px;
+    background: #e8f045;
+    border-radius: 8px;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    padding: 0 30px;
+  }
+  .cta-title {
+    font-family: 'Anton', Impact, sans-serif;
+    font-size: 44px; color: #000000; font-weight: 900;
+    text-align: center; letter-spacing: -1px;
+  }
+  .cta-subtitle {
+    font-size: 24px; color: #000000;
+    margin-top: 12px; text-align: center;
+  }
+
+  .pill {
+    position: absolute; top: 1270px; height: 50px;
+    background: #ffffff; border-radius: 25px;
+    display: flex; align-items: center; justify-content: center;
+    color: #000000; font-size: 24px;
+  }
+  .pill-left { left: 60px; width: 120px; font-weight: 700; }
+  .pill-right { right: 60px; width: 200px; font-weight: 900; }
+  .footer-text {
+    position: absolute; left: 200px; top: 1290px;
+    font-size: 22px; color: #ffffff; opacity: 0.85;
+  }
+</style>
+</head>
+<body>
+  <div class="canvas">
+    <img class="bg-img" src="{{bg_image_url}}" />
+    <div class="dim-overlay"></div>
+    <div class="grid"></div>
+
+    <div class="top-header-left">{{topic_label}}</div>
+    <div class="top-header-right">{{year}}</div>
+
+    <div class="question-1">{{question_1}}</div>
+    <div class="question-2">{{question_2}}</div>
+
+    <div class="action action-1">
+      <div class="action-num">01</div>
+      <div class="action-text">
+        <div class="action-title">{{action_1_title}}</div>
+        <div class="action-subtitle">{{action_1_subtitle}}</div>
+      </div>
+    </div>
+    <div class="action action-2">
+      <div class="action-num">02</div>
+      <div class="action-text">
+        <div class="action-title">{{action_2_title}}</div>
+        <div class="action-subtitle">{{action_2_subtitle}}</div>
+      </div>
+    </div>
+    <div class="action action-3">
+      <div class="action-num">03</div>
+      <div class="action-text">
+        <div class="action-title">{{action_3_title}}</div>
+        <div class="action-subtitle">{{action_3_subtitle}}</div>
+      </div>
+    </div>
+
+    <!-- arrow-right pixelarticons -->
+    <svg class="deco-arrow" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 11v2h16v-2zm12 2v2h2v-2zm-2 2v2h2v-2zm-2 2v2h2v-2zm4-6V9h2v2z"/>
+      <path d="M14 15V7h2v8zm-2 2V5h2v12z"/>
+    </svg>
+
+    <div class="cta-box">
+      <div class="cta-title">{{cta_title}}</div>
+      <div class="cta-subtitle">{{cta_subtitle}}</div>
+    </div>
+
+    <div class="pill pill-left">{{page_counter}}</div>
+    <div class="footer-text">Подробнее на traffnews.com</div>
+    <div class="pill pill-right">TRAFFNEWS</div>
+  </div>
+</body>
+</html>
