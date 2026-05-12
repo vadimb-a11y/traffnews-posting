@@ -9,12 +9,12 @@
   Canvas: 1080×1350
 
   Variables:
-    {{bg_image_url}}     — URL retrofuture-фона от Replicate
-    {{topic_label}}      — top-left header (e.g. "Сокращения 2026")
-    {{year}}             — top-right header (e.g. "2026")
-    {{title_line_1}}     — первая строка заголовка (CAPS, e.g. "ИИ ПРОТИВ")
-    {{title_line_2}}     — вторая строка заголовка (CAPS, e.g. "ОФИСА")
-    {{page_counter}}     — счётчик (e.g. "1/7")
+    __bg_image_url__     — URL retrofuture-фона от Replicate
+    __topic_label__      — top-left header (e.g. "Сокращения 2026")
+    __year__             — top-right header (e.g. "2026")
+    __title_line_1__     — первая строка заголовка (CAPS, e.g. "ИИ ПРОТИВ")
+    __title_line_2__     — вторая строка заголовка (CAPS, e.g. "ОФИСА")
+    __page_counter__     — счётчик (e.g. "1/7")
 -->
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@700&display=swap');
@@ -84,16 +84,16 @@
 </head>
 <body>
   <div class="canvas">
-    <img class="bg-img" src="{{bg_image_url}}" />
+    <img class="bg-img" src="__bg_image_url__" />
     <div class="dim-overlay"></div>
     <div class="grid"></div>
 
-    <div class="top-header-left">{{topic_label}}</div>
-    <div class="top-header-right">{{year}}</div>
+    <div class="top-header-left">__topic_label__</div>
+    <div class="top-header-right">__year__</div>
 
     <div class="title-band">
-      <div class="title-line">{{title_line_1}}</div>
-      <div class="title-line">{{title_line_2}}</div>
+      <div class="title-line">__title_line_1__</div>
+      <div class="title-line">__title_line_2__</div>
     </div>
 
     <!-- memory-stick -->
@@ -105,7 +105,7 @@
       <path d="M5 4h4v2H5zm14 0h-4v2h4zM5 20h4v-2H5zm14 0h-4v-2h4zM3 6h2v12H3zm18 0h-2v12h2z"/>
     </svg>
 
-    <div class="pill pill-left">{{page_counter}}</div>
+    <div class="pill pill-left">__page_counter__</div>
     <div class="footer-text">Подробнее на traffnews.com</div>
     <div class="pill pill-right">TRAFFNEWS</div>
   </div>

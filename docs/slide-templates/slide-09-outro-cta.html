@@ -9,20 +9,20 @@
   Canvas: 1080×1350
 
   Variables:
-    {{bg_image_url}}      — Replicate retrofuture-фон
-    {{topic_label}}       — top-left header
-    {{year}}              — top-right header
-    {{question_1}}        — первая строка вопроса (CAPS, e.g. "ЧТО")
-    {{question_2}}        — вторая строка (CAPS, e.g. "ДЕЛАТЬ?") — рендерится жёлтым
-    {{action_1_title}}    — заголовок первого действия
-    {{action_1_subtitle}} — пояснение первого действия
-    {{action_2_title}}    — второй
-    {{action_2_subtitle}} —
-    {{action_3_title}}    — третий
-    {{action_3_subtitle}} —
-    {{cta_title}}         — главный CTA (e.g. "ПОДПИШИСЬ НА TRAFFNEWS")
-    {{cta_subtitle}}      — подпись CTA
-    {{page_counter}}      — счётчик
+    __bg_image_url__      — Replicate retrofuture-фон
+    __topic_label__       — top-left header
+    __year__              — top-right header
+    __question_1__        — первая строка вопроса (CAPS, e.g. "ЧТО")
+    __question_2__        — вторая строка (CAPS, e.g. "ДЕЛАТЬ?") — рендерится жёлтым
+    __action_1_title__    — заголовок первого действия
+    __action_1_subtitle__ — пояснение первого действия
+    __action_2_title__    — второй
+    __action_2_subtitle__ —
+    __action_3_title__    — третий
+    __action_3_subtitle__ —
+    __cta_title__         — главный CTA (e.g. "ПОДПИШИСЬ НА TRAFFNEWS")
+    __cta_subtitle__      — подпись CTA
+    __page_counter__      — счётчик
 -->
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@700&display=swap');
@@ -113,35 +113,35 @@
 </head>
 <body>
   <div class="canvas">
-    <img class="bg-img" src="{{bg_image_url}}" />
+    <img class="bg-img" src="__bg_image_url__" />
     <div class="dim-overlay"></div>
     <div class="grid"></div>
 
-    <div class="top-header-left">{{topic_label}}</div>
-    <div class="top-header-right">{{year}}</div>
+    <div class="top-header-left">__topic_label__</div>
+    <div class="top-header-right">__year__</div>
 
-    <div class="question-1">{{question_1}}</div>
-    <div class="question-2">{{question_2}}</div>
+    <div class="question-1">__question_1__</div>
+    <div class="question-2">__question_2__</div>
 
     <div class="action action-1">
       <div class="action-num">01</div>
       <div class="action-text">
-        <div class="action-title">{{action_1_title}}</div>
-        <div class="action-subtitle">{{action_1_subtitle}}</div>
+        <div class="action-title">__action_1_title__</div>
+        <div class="action-subtitle">__action_1_subtitle__</div>
       </div>
     </div>
     <div class="action action-2">
       <div class="action-num">02</div>
       <div class="action-text">
-        <div class="action-title">{{action_2_title}}</div>
-        <div class="action-subtitle">{{action_2_subtitle}}</div>
+        <div class="action-title">__action_2_title__</div>
+        <div class="action-subtitle">__action_2_subtitle__</div>
       </div>
     </div>
     <div class="action action-3">
       <div class="action-num">03</div>
       <div class="action-text">
-        <div class="action-title">{{action_3_title}}</div>
-        <div class="action-subtitle">{{action_3_subtitle}}</div>
+        <div class="action-title">__action_3_title__</div>
+        <div class="action-subtitle">__action_3_subtitle__</div>
       </div>
     </div>
 
@@ -152,11 +152,11 @@
     </svg>
 
     <div class="cta-box">
-      <div class="cta-title">{{cta_title}}</div>
-      <div class="cta-subtitle">{{cta_subtitle}}</div>
+      <div class="cta-title">__cta_title__</div>
+      <div class="cta-subtitle">__cta_subtitle__</div>
     </div>
 
-    <div class="pill pill-left">{{page_counter}}</div>
+    <div class="pill pill-left">__page_counter__</div>
     <div class="footer-text">Подробнее на traffnews.com</div>
     <div class="pill pill-right">TRAFFNEWS</div>
   </div>

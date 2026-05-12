@@ -9,16 +9,16 @@
   Canvas: 1080×1350
 
   Variables (mapped from PostDirector slide object):
-    {{bg_image_url}}       — URL retrofuture-фона от Replicate
-    {{topic_label}}        — top-left header (e.g. "Сокращения 2026")
-    {{year}}               — top-right header (e.g. "2026")
-    {{big_number}}         — главное число (e.g. "26%")
-    {{subline_1}}          — первая строка под цифрой
-    {{subline_2}}          — вторая строка под цифрой
-    {{secondary_yellow}}   — вторичная статистика (e.g. "21 490 рабочих мест")
-    {{secondary_white}}    — комментарий под secondary_yellow (e.g. "за один месяц.")
-    {{body_text}}          — контекстный параграф 3-4 строки
-    {{page_counter}}       — счётчик (e.g. "2/7")
+    __bg_image_url__       — URL retrofuture-фона от Replicate
+    __topic_label__        — top-left header (e.g. "Сокращения 2026")
+    __year__               — top-right header (e.g. "2026")
+    __big_number__         — главное число (e.g. "26%")
+    __subline_1__          — первая строка под цифрой
+    __subline_2__          — вторая строка под цифрой
+    __secondary_yellow__   — вторичная статистика (e.g. "21 490 рабочих мест")
+    __secondary_white__    — комментарий под secondary_yellow (e.g. "за один месяц.")
+    __body_text__          — контекстный параграф 3-4 строки
+    __page_counter__       — счётчик (e.g. "2/7")
 -->
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@700&display=swap');
@@ -182,29 +182,29 @@
 </head>
 <body>
   <div class="canvas">
-    <img class="bg-img" src="{{bg_image_url}}" />
+    <img class="bg-img" src="__bg_image_url__" />
     <div class="dim-overlay"></div>
     <div class="grid"></div>
 
-    <div class="top-header-left">{{topic_label}}</div>
-    <div class="top-header-right">{{year}}</div>
+    <div class="top-header-left">__topic_label__</div>
+    <div class="top-header-right">__year__</div>
 
-    <div class="big-number">{{big_number}}</div>
+    <div class="big-number">__big_number__</div>
 
-    <div class="subline">{{subline_1}}<br/>{{subline_2}}</div>
+    <div class="subline">__subline_1__<br/>__subline_2__</div>
     <div class="underline-accent"></div>
 
-    <div class="sec-yellow">{{secondary_yellow}}</div>
-    <div class="sec-white">{{secondary_white}}</div>
+    <div class="sec-yellow">__secondary_yellow__</div>
+    <div class="sec-white">__secondary_white__</div>
 
-    <div class="body-text">{{body_text}}</div>
+    <div class="body-text">__body_text__</div>
 
     <!-- pixelarticons brackets, decorative -->
     <svg class="brackets-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
       <path d="M5 4h4v2H5zm14 0h-4v2h4zM5 20h4v-2H5zm14 0h-4v-2h4zM3 6h2v12H3zm18 0h-2v12h2z"/>
     </svg>
 
-    <div class="pill pill-left">{{page_counter}}</div>
+    <div class="pill pill-left">__page_counter__</div>
     <div class="footer-text">Подробнее на traffnews.com</div>
     <div class="pill pill-right">TRAFFNEWS</div>
   </div>
