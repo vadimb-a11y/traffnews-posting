@@ -1,21 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<!--
-  Slide type: cover
-  Use for: первый слайд карусели (опенер)
-  Reference: preview/slide-01-cover.svg
-  Canvas: 1080×1350
-
-  Variables:
-    __bg_image_url__     — URL retrofuture-фона от Replicate
-    __topic_label__      — top-left header (e.g. "Сокращения 2026")
-    __year__             — top-right header (e.g. "2026")
-    __title_line_1__     — первая строка заголовка (CAPS, e.g. "ИИ ПРОТИВ")
-    __title_line_2__     — вторая строка заголовка (CAPS, e.g. "ОФИСА")
-    __page_counter__     — счётчик (e.g. "1/7")
--->
+<meta charset='UTF-8'>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@700&display=swap');
   body { margin: 0; font-family: 'Inter', sans-serif; }
@@ -39,8 +25,6 @@
   }
   .top-header-left { left: 60px; }
   .top-header-right { right: 60px; }
-
-  /* Diagonal black band with title */
   .title-band {
     position: absolute;
     left: -40px; right: -40px;
@@ -60,14 +44,10 @@
     margin: 5px 0;
     text-align: center;
   }
-
-  /* Decorative pixelarticons — memory-stick + brackets */
   .deco-1 { position: absolute; right: 80px; top: 1060px; width: 130px; height: 130px; }
   .deco-1 path { fill: #ffffff; }
   .deco-2 { position: absolute; right: 240px; top: 1120px; width: 80px; height: 80px; }
   .deco-2 path { fill: #e8f045; }
-
-  /* Brand anchors */
   .pill {
     position: absolute; top: 1270px; height: 50px;
     background: #ffffff; border-radius: 25px;
@@ -83,31 +63,25 @@
 </style>
 </head>
 <body>
-  <div class="canvas">
-    <img class="bg-img" src="__bg_image_url__" />
-    <div class="dim-overlay"></div>
-    <div class="grid"></div>
-
-    <div class="top-header-left">__topic_label__</div>
-    <div class="top-header-right">__year__</div>
-
-    <div class="title-band">
-      <div class="title-line">__title_line_1__</div>
-      <div class="title-line">__title_line_2__</div>
+  <div class='canvas'>
+    <img class='bg-img' src='__bg_image_url__' />
+    <div class='dim-overlay'></div>
+    <div class='grid'></div>
+    <div class='top-header-left'>__topic_label__</div>
+    <div class='top-header-right'>__year__</div>
+    <div class='title-band'>
+      <div class='title-line'>__title_line_1__</div>
+      <div class='title-line'>__title_line_2__</div>
     </div>
-
-    <!-- memory-stick -->
-    <svg class="deco-1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M3 4h18v2H3zM1 6h2v3H1zm0 5h2v7H1zm20 0h2v7h-2zM3 9h2v2H3zm16 0h2v2h-2zm2-3h2v3h-2zM3 18h18v2H3zm0-4h18v2H3zm2 2h2v2H5zm4 0h2v2H9zm4 0h2v2h-2zm4 0h2v2h-2zM7 8h2v4H7zm4 0h2v4h-2zm4 0h2v4h-2z"/>
+    <svg class='deco-1' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+      <path d='M3 4h18v2H3zM1 6h2v3H1zm0 5h2v7H1zm20 0h2v7h-2zM3 9h2v2H3zm16 0h2v2h-2zm2-3h2v3h-2zM3 18h18v2H3zm0-4h18v2H3zm2 2h2v2H5zm4 0h2v2H9zm4 0h2v2h-2zm4 0h2v2h-2zM7 8h2v4H7zm4 0h2v4h-2zm4 0h2v4h-2z'/>
     </svg>
-    <!-- brackets -->
-    <svg class="deco-2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M5 4h4v2H5zm14 0h-4v2h4zM5 20h4v-2H5zm14 0h-4v-2h4zM3 6h2v12H3zm18 0h-2v12h2z"/>
+    <svg class='deco-2' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+      <path d='M5 4h4v2H5zm14 0h-4v2h4zM5 20h4v-2H5zm14 0h-4v-2h4zM3 6h2v12H3zm18 0h-2v12h2z'/>
     </svg>
-
-    <div class="pill pill-left">__page_counter__</div>
-    <div class="footer-text">Подробнее на traffnews.com</div>
-    <div class="pill pill-right">TRAFFNEWS</div>
+    <div class='pill pill-left'>__page_counter__</div>
+    <div class='footer-text'>Подробнее на traffnews.com</div>
+    <div class='pill pill-right'>TRAFFNEWS</div>
   </div>
 </body>
 </html>

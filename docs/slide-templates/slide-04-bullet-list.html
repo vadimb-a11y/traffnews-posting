@@ -1,22 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<!--
-  Slide type: bullet_list
-  Use for: список из 3-5 пунктов
-  Reference: preview/slide-05-affected.svg
-  Canvas: 1080×1350
-
-  Variables:
-    __bg_image_url__     — Replicate retrofuture-фон
-    __topic_label__      — top-left header
-    __year__             — top-right header
-    __section_title__    — заголовок секции (CAPS, e.g. "КОГО РЕЖУТ ПЕРВЫМ")
-    __bullet_1__ ... __bullet_5__  — пункты (1-5; пустые скрыть)
-    __caption_text__     — мелкая подпись внизу (optional)
-    __page_counter__     — счётчик
--->
+<meta charset='UTF-8'>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@700&display=swap');
   body { margin: 0; font-family: 'Inter', sans-serif; }
@@ -40,7 +25,6 @@
   }
   .top-header-left { left: 60px; }
   .top-header-right { right: 60px; }
-
   .section-title {
     position: absolute; left: 60px; top: 170px;
     font-family: 'Anton', Impact, sans-serif; font-size: 80px;
@@ -52,7 +36,6 @@
     position: absolute; left: 60px; top: 305px;
     width: 220px; height: 6px; background: #e8f045;
   }
-
   .bullets {
     position: absolute; left: 60px; right: 60px; top: 410px;
   }
@@ -68,14 +51,12 @@
     font-size: 44px; line-height: 1;
   }
   .bullet:empty { display: none; }
-
   .caption {
     position: absolute; left: 60px; right: 60px;
     bottom: 130px;
     font-size: 24px; color: #ffffff;
     opacity: 0.8; font-weight: 500;
   }
-
   .pill {
     position: absolute; top: 1270px; height: 50px;
     background: #ffffff; border-radius: 25px;
@@ -91,30 +72,25 @@
 </style>
 </head>
 <body>
-  <div class="canvas">
-    <img class="bg-img" src="__bg_image_url__" />
-    <div class="dim-overlay"></div>
-    <div class="grid"></div>
-
-    <div class="top-header-left">__topic_label__</div>
-    <div class="top-header-right">__year__</div>
-
-    <div class="section-title">__section_title__</div>
-    <div class="title-underline"></div>
-
-    <div class="bullets">
-      <div class="bullet"><span class="bullet-marker">→</span><span>__bullet_1__</span></div>
-      <div class="bullet"><span class="bullet-marker">→</span><span>__bullet_2__</span></div>
-      <div class="bullet"><span class="bullet-marker">→</span><span>__bullet_3__</span></div>
-      <div class="bullet"><span class="bullet-marker">→</span><span>__bullet_4__</span></div>
-      <div class="bullet"><span class="bullet-marker">→</span><span>__bullet_5__</span></div>
+  <div class='canvas'>
+    <img class='bg-img' src='__bg_image_url__' />
+    <div class='dim-overlay'></div>
+    <div class='grid'></div>
+    <div class='top-header-left'>__topic_label__</div>
+    <div class='top-header-right'>__year__</div>
+    <div class='section-title'>__section_title__</div>
+    <div class='title-underline'></div>
+    <div class='bullets'>
+      <div class='bullet'><span class='bullet-marker'>→</span><span>__bullet_1__</span></div>
+      <div class='bullet'><span class='bullet-marker'>→</span><span>__bullet_2__</span></div>
+      <div class='bullet'><span class='bullet-marker'>→</span><span>__bullet_3__</span></div>
+      <div class='bullet'><span class='bullet-marker'>→</span><span>__bullet_4__</span></div>
+      <div class='bullet'><span class='bullet-marker'>→</span><span>__bullet_5__</span></div>
     </div>
-
-    <div class="caption">__caption_text__</div>
-
-    <div class="pill pill-left">__page_counter__</div>
-    <div class="footer-text">Подробнее на traffnews.com</div>
-    <div class="pill pill-right">TRAFFNEWS</div>
+    <div class='caption'>__caption_text__</div>
+    <div class='pill pill-left'>__page_counter__</div>
+    <div class='footer-text'>Подробнее на traffnews.com</div>
+    <div class='pill pill-right'>TRAFFNEWS</div>
   </div>
 </body>
 </html>

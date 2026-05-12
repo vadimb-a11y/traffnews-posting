@@ -1,29 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<!--
-  Slide type: outro_cta
-  Use for: финальный слайд карусели (CTA + action items)
-  Reference: preview/slide-07-outro.svg
-  Canvas: 1080×1350
-
-  Variables:
-    __bg_image_url__      — Replicate retrofuture-фон
-    __topic_label__       — top-left header
-    __year__              — top-right header
-    __question_1__        — первая строка вопроса (CAPS, e.g. "ЧТО")
-    __question_2__        — вторая строка (CAPS, e.g. "ДЕЛАТЬ?") — рендерится жёлтым
-    __action_1_title__    — заголовок первого действия
-    __action_1_subtitle__ — пояснение первого действия
-    __action_2_title__    — второй
-    __action_2_subtitle__ —
-    __action_3_title__    — третий
-    __action_3_subtitle__ —
-    __cta_title__         — главный CTA (e.g. "ПОДПИШИСЬ НА TRAFFNEWS")
-    __cta_subtitle__      — подпись CTA
-    __page_counter__      — счётчик
--->
+<meta charset='UTF-8'>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@700&display=swap');
   body { margin: 0; font-family: 'Inter', sans-serif; }
@@ -47,7 +25,6 @@
   }
   .top-header-left { left: 60px; }
   .top-header-right { right: 60px; }
-
   .question-1, .question-2 {
     position: absolute; left: 60px;
     font-family: 'Anton', Impact, sans-serif;
@@ -56,7 +33,6 @@
   }
   .question-1 { top: 150px; color: #ffffff; }
   .question-2 { top: 310px; color: #e8f045; }
-
   .action {
     position: absolute; left: 60px; right: 60px;
     display: flex; align-items: flex-start;
@@ -72,12 +48,8 @@
   .action-text { flex: 1; }
   .action-title { color: #ffffff; font-size: 34px; font-weight: 700; line-height: 1.2; }
   .action-subtitle { color: #ffffff; opacity: 0.75; font-size: 24px; font-weight: 400; margin-top: 6px; }
-
-  /* Decorative arrow-right yellow */
   .deco-arrow { position: absolute; right: 60px; top: 880px; width: 120px; height: 120px; }
   .deco-arrow path { fill: #e8f045; }
-
-  /* CTA box */
   .cta-box {
     position: absolute; left: 60px; right: 60px;
     top: 1050px; height: 150px;
@@ -96,7 +68,6 @@
     font-size: 24px; color: #000000;
     margin-top: 12px; text-align: center;
   }
-
   .pill {
     position: absolute; top: 1270px; height: 50px;
     background: #ffffff; border-radius: 25px;
@@ -112,53 +83,46 @@
 </style>
 </head>
 <body>
-  <div class="canvas">
-    <img class="bg-img" src="__bg_image_url__" />
-    <div class="dim-overlay"></div>
-    <div class="grid"></div>
-
-    <div class="top-header-left">__topic_label__</div>
-    <div class="top-header-right">__year__</div>
-
-    <div class="question-1">__question_1__</div>
-    <div class="question-2">__question_2__</div>
-
-    <div class="action action-1">
-      <div class="action-num">01</div>
-      <div class="action-text">
-        <div class="action-title">__action_1_title__</div>
-        <div class="action-subtitle">__action_1_subtitle__</div>
+  <div class='canvas'>
+    <img class='bg-img' src='__bg_image_url__' />
+    <div class='dim-overlay'></div>
+    <div class='grid'></div>
+    <div class='top-header-left'>__topic_label__</div>
+    <div class='top-header-right'>__year__</div>
+    <div class='question-1'>__question_1__</div>
+    <div class='question-2'>__question_2__</div>
+    <div class='action action-1'>
+      <div class='action-num'>01</div>
+      <div class='action-text'>
+        <div class='action-title'>__action_1_title__</div>
+        <div class='action-subtitle'>__action_1_subtitle__</div>
       </div>
     </div>
-    <div class="action action-2">
-      <div class="action-num">02</div>
-      <div class="action-text">
-        <div class="action-title">__action_2_title__</div>
-        <div class="action-subtitle">__action_2_subtitle__</div>
+    <div class='action action-2'>
+      <div class='action-num'>02</div>
+      <div class='action-text'>
+        <div class='action-title'>__action_2_title__</div>
+        <div class='action-subtitle'>__action_2_subtitle__</div>
       </div>
     </div>
-    <div class="action action-3">
-      <div class="action-num">03</div>
-      <div class="action-text">
-        <div class="action-title">__action_3_title__</div>
-        <div class="action-subtitle">__action_3_subtitle__</div>
+    <div class='action action-3'>
+      <div class='action-num'>03</div>
+      <div class='action-text'>
+        <div class='action-title'>__action_3_title__</div>
+        <div class='action-subtitle'>__action_3_subtitle__</div>
       </div>
     </div>
-
-    <!-- arrow-right pixelarticons -->
-    <svg class="deco-arrow" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M4 11v2h16v-2zm12 2v2h2v-2zm-2 2v2h2v-2zm-2 2v2h2v-2zm4-6V9h2v2z"/>
-      <path d="M14 15V7h2v8zm-2 2V5h2v12z"/>
+    <svg class='deco-arrow' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+      <path d='M4 11v2h16v-2zm12 2v2h2v-2zm-2 2v2h2v-2zm-2 2v2h2v-2zm4-6V9h2v2z'/>
+      <path d='M14 15V7h2v8zm-2 2V5h2v12z'/>
     </svg>
-
-    <div class="cta-box">
-      <div class="cta-title">__cta_title__</div>
-      <div class="cta-subtitle">__cta_subtitle__</div>
+    <div class='cta-box'>
+      <div class='cta-title'>__cta_title__</div>
+      <div class='cta-subtitle'>__cta_subtitle__</div>
     </div>
-
-    <div class="pill pill-left">__page_counter__</div>
-    <div class="footer-text">Подробнее на traffnews.com</div>
-    <div class="pill pill-right">TRAFFNEWS</div>
+    <div class='pill pill-left'>__page_counter__</div>
+    <div class='footer-text'>Подробнее на traffnews.com</div>
+    <div class='pill pill-right'>TRAFFNEWS</div>
   </div>
 </body>
 </html>

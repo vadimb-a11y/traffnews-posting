@@ -1,33 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<!--
-  Slide type: big_number
-  Use for: главное число / процент / показатель статьи
-  Reference: preview/slide-02-hybrid-v2.png
-  Canvas: 1080×1350
-
-  Variables (mapped from PostDirector slide object):
-    __bg_image_url__       — URL retrofuture-фона от Replicate
-    __topic_label__        — top-left header (e.g. "Сокращения 2026")
-    __year__               — top-right header (e.g. "2026")
-    __big_number__         — главное число (e.g. "26%")
-    __subline_1__          — первая строка под цифрой
-    __subline_2__          — вторая строка под цифрой
-    __secondary_yellow__   — вторичная статистика (e.g. "21 490 рабочих мест")
-    __secondary_white__    — комментарий под secondary_yellow (e.g. "за один месяц.")
-    __body_text__          — контекстный параграф 3-4 строки
-    __page_counter__       — счётчик (e.g. "2/7")
--->
+<meta charset='UTF-8'>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@700&display=swap');
-
   body {
     margin: 0;
     font-family: 'Inter', sans-serif;
   }
-
   .canvas {
     position: relative;
     width: 1080px;
@@ -35,7 +15,6 @@
     background: #1a0d3a;
     overflow: hidden;
   }
-
   .bg-img {
     position: absolute;
     inset: 0;
@@ -43,13 +22,11 @@
     height: 100%;
     object-fit: cover;
   }
-
   .dim-overlay {
     position: absolute;
     inset: 0;
     background: rgba(26, 13, 58, 0.65);
   }
-
   .grid {
     position: absolute;
     inset: 0;
@@ -59,7 +36,6 @@
     background-size: 60px 60px;
     pointer-events: none;
   }
-
   .top-header-left,
   .top-header-right {
     position: absolute;
@@ -71,7 +47,6 @@
   }
   .top-header-left { left: 60px; }
   .top-header-right { right: 60px; }
-
   .big-number {
     position: absolute;
     left: 60px;
@@ -83,7 +58,6 @@
     letter-spacing: -2px;
     line-height: 1;
   }
-
   .subline {
     position: absolute;
     left: 60px;
@@ -94,7 +68,6 @@
     line-height: 1.3;
     max-width: 960px;
   }
-
   .underline-accent {
     position: absolute;
     left: 60px;
@@ -103,7 +76,6 @@
     height: 6px;
     background: #e8f045;
   }
-
   .sec-yellow {
     position: absolute;
     left: 60px;
@@ -112,7 +84,6 @@
     color: #e8f045;
     font-weight: 600;
   }
-
   .sec-white {
     position: absolute;
     left: 60px;
@@ -121,7 +92,6 @@
     color: #ffffff;
     font-weight: 400;
   }
-
   .body-text {
     position: absolute;
     left: 60px;
@@ -136,8 +106,6 @@
     line-height: 1.4;
     box-sizing: border-box;
   }
-
-  /* Decorative pixel-art brackets (from pixelarticons) */
   .brackets-icon {
     position: absolute;
     right: 80px;
@@ -146,8 +114,6 @@
     height: 144px;
   }
   .brackets-icon path { fill: #ffffff; }
-
-  /* Brand anchors — bottom row */
   .pill {
     position: absolute;
     top: 1270px;
@@ -181,32 +147,24 @@
 </style>
 </head>
 <body>
-  <div class="canvas">
-    <img class="bg-img" src="__bg_image_url__" />
-    <div class="dim-overlay"></div>
-    <div class="grid"></div>
-
-    <div class="top-header-left">__topic_label__</div>
-    <div class="top-header-right">__year__</div>
-
-    <div class="big-number">__big_number__</div>
-
-    <div class="subline">__subline_1__<br/>__subline_2__</div>
-    <div class="underline-accent"></div>
-
-    <div class="sec-yellow">__secondary_yellow__</div>
-    <div class="sec-white">__secondary_white__</div>
-
-    <div class="body-text">__body_text__</div>
-
-    <!-- pixelarticons brackets, decorative -->
-    <svg class="brackets-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M5 4h4v2H5zm14 0h-4v2h4zM5 20h4v-2H5zm14 0h-4v-2h4zM3 6h2v12H3zm18 0h-2v12h2z"/>
+  <div class='canvas'>
+    <img class='bg-img' src='__bg_image_url__' />
+    <div class='dim-overlay'></div>
+    <div class='grid'></div>
+    <div class='top-header-left'>__topic_label__</div>
+    <div class='top-header-right'>__year__</div>
+    <div class='big-number'>__big_number__</div>
+    <div class='subline'>__subline_1__<br/>__subline_2__</div>
+    <div class='underline-accent'></div>
+    <div class='sec-yellow'>__secondary_yellow__</div>
+    <div class='sec-white'>__secondary_white__</div>
+    <div class='body-text'>__body_text__</div>
+    <svg class='brackets-icon' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+      <path d='M5 4h4v2H5zm14 0h-4v2h4zM5 20h4v-2H5zm14 0h-4v-2h4zM3 6h2v12H3zm18 0h-2v12h2z'/>
     </svg>
-
-    <div class="pill pill-left">__page_counter__</div>
-    <div class="footer-text">Подробнее на traffnews.com</div>
-    <div class="pill pill-right">TRAFFNEWS</div>
+    <div class='pill pill-left'>__page_counter__</div>
+    <div class='footer-text'>Подробнее на traffnews.com</div>
+    <div class='pill pill-right'>TRAFFNEWS</div>
   </div>
 </body>
 </html>
