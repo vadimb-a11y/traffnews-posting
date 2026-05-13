@@ -50,7 +50,7 @@
     margin-right: 24px; flex-shrink: 0;
     font-size: 44px; line-height: 1;
   }
-  .bullet:empty { display: none; }
+  .bullet:has(> span:last-child:empty) { display: none; }
   .caption {
     position: absolute; left: 60px; right: 60px;
     bottom: 130px;
