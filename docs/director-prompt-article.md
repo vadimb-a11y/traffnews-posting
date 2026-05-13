@@ -66,7 +66,7 @@ ANTI-FABRICATION (HARD RULE):
 - secondary_white: ≤ 24 chars
 - body_text: 80-180 chars, 2-3 предложения
 - section_title: ≤ 26 chars, CAPS
-- bullet_1..5: ≤ 42 chars каждый; неиспользуемые = пустая строка ""
+- bullet_1..5: ≤ 42 chars каждый; **МИНИМУМ 3 непустых буллета обязательно**, остальные = "". Если контента нет на 3+ буллета — используй ДРУГОЙ visual_intent (quote_block / big_number / outro_cta), НЕ генери bullet_list с пустотой.
 - item_N_title (numbered/service): ≤ 30 chars
 - item_N_subtitle: ≤ 60 chars
 - item_N_name (service_list): ≤ 18 chars
